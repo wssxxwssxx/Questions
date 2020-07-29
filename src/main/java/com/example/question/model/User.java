@@ -17,13 +17,11 @@ public class User {
     @Column(name = "password")
     private String password;
 
-    @Transient
-    transient private String confirmPassword;//transient - значит мы его никуда не записываем, эта переменная используется для подверждения пароля
+    private boolean active;
 
-    @ManyToMany
-    //Сет ролей джонится с таблиц "user_roles"
-    @JoinTable(name = "user_roles", joinColumns = @JoinColumn(name = "user_id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id"))
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.LAZY)
+    @CollectionTable(name = "user_role", joinColumns = @JoinColumn(name = "id_user"))//здесь мы говорим что создаем отдельную таблицу и связываем с user_id
+    @Enumerated(EnumType.STRING)//хотим хранить в виде строки
     private Set<Role> roles;
 
     public long getId() {
@@ -50,20 +48,20 @@ public class User {
         this.password = password;
     }
 
-    public String getConfirmPassword() {
-        return confirmPassword;
-    }
-
-    public void setConfirmPassword(String confirmPassword) {
-        this.confirmPassword = confirmPassword;
-    }
-
     public Set<Role> getRoles() {
         return roles;
     }
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public boolean isActive() {
+        return active;
+    }
+
+    public void setActive(boolean active) {
+        this.active = active;
     }
 }
 
