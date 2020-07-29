@@ -17,10 +17,10 @@ public class AppController {
         return "newform";
     }
 
-    @GetMapping("/registration")
-    public String registration(){
-        return "registration";
-    }
+   // @GetMapping("/registration")
+    //public String registration(){
+    //    return "registration";
+   // }
 
     @GetMapping("/authorized")
     public String authorized(){
