@@ -1,7 +1,5 @@
-package com.example.question.controllers;
-
-import com.example.question.model.Role;
-import com.example.question.model.User;
+package com.example.question.controller;
+/**
 import com.example.question.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +12,7 @@ import java.util.Map;
 public class AppController {
 
     @Autowired
-    private UserRepo userRepo;
+    //private UserRepo userRepo;
 
     //MainPage
     @GetMapping("/")
@@ -53,3 +51,4 @@ public class AppController {
         return "authorized";
     }
 }
+*/

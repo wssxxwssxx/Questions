@@ -1,26 +1,26 @@
 
 -- Table: users
-CREATE TABLE users
+CREATE TABLE t_user
 (
-       id       INTEGER PRIMARY KEY,
-       username VARCHAR(255) NOT NULL,
-       password VARCHAR(255) NOT NULL
+       id            SERIAL PRIMARY KEY,
+       username      VARCHAR(255) NOT NULL,
+       password      VARCHAR(255) NOT NULL
 );
 
 -- Table: roles
-CREATE TABLE roles (
-      id   INTEGER PRIMARY KEY,
-      name VARCHAR(100) NOT NULL
+CREATE TABLE t_role (
+       id       INT PRIMARY KEY,
+       name     VARCHAR(255) NOT NULL
 );
 
 -- Table for mapping user and roles: user_roles
-CREATE TABLE user_roles (
+CREATE TABLE t_user_roles (
     user_id INT NOT NULL,
-    role_id INT NOT NULL,
+    roles_id INT NOT NULL,
 
-     FOREIGN KEY (user_id) REFERENCES users (id),
-     FOREIGN KEY (role_id) REFERENCES roles (id),
+     FOREIGN KEY (user_id) REFERENCES t_user (id),
+     FOREIGN KEY (roles_id) REFERENCES t_role (id),
 
-     UNIQUE (user_id, role_id)
+     UNIQUE (user_id, roles_id)
 );
 
