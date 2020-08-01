@@ -1,6 +1,7 @@
 package com.example.question.config;
 
-import com.boots.service.UserService;
+
+import com.example.question.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -39,14 +40,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                     //Настройка для входа в систему
                     .formLogin()
-                    .loginPage("/login")
+                    .loginPage("/authorized")
                     //Перенарпавление на главную страницу после успешного входа
-                    .defaultSuccessUrl("/")
+                    .defaultSuccessUrl("/main")
                     .permitAll()
                 .and()
                     .logout()
                     .permitAll()
-                    .logoutSuccessUrl("/");
+                    .logoutSuccessUrl("/main");
     }
 
     @Autowired
