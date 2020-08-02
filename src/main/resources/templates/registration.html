@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="ru" class="no-js" xmlns:form="http://www.springframework.org/tags/form"
+<html lang="ru" class="no-js"
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:form="http://www.springframework.org/tags/form"
 	  xmlns:sec="http://www.springframework.org/security/tags">
 	<head>
 		<meta charset="UTF-8" />
@@ -44,7 +46,7 @@
 					</nav>
 				</li>
 				<li><a href="main">на главную</a></li>
-				<li><h3>${pageContext.request.userPrincipal.name}</h3></li>
+				<li><h4 text="${pageContext.request.userPrincipal.name}"></h4></li>
 				<li><a href="authorized">Логин</a></li>
 				
 			</ul>
@@ -58,22 +60,23 @@
 			new gnMenu( document.getElementById( 'gn-menu' ) );
 		</script>
 
-		<form:form method="POST" modelAttribute="userForm">
+		<form method="POST" modelAttribute="userForm">
 			<div>
 				<h2>Введите свою почту и пароль</h2>
 			</div>
 			<div>
-				<p>Ваш логин  <form:input type="text"
-									 path="username"
-									 placeholder="Username"
-										  autofocus="true"></form:input>
+				<p><span>Ваш логин</span>
+					<input type="text"
+						   path="username"
+						   placeholder="Username"
+						   autofocus="true" />
 				</p>
-				<form:errors path="username"></form:errors>
-				${usernameError}
+				<th:block path="username" text="${usernameError}"></th:block>
 
-				<p>Ваш пароль<form:input  type="password"
+
+				<p>Ваш пароль<input  type="password"
 									 path="password"
-										  placeholder="Password"></form:input>
+										  placeholder="Password" />
 				</p>
 				<!--input type="hidden" name="_csrf" value="{{_csrf.token}}"/-->
 			</div>
@@ -82,8 +85,8 @@
 					   path="passwordConfirm"
 					   placeholder="Confirm your password">
 				</p>
-				<form:errors path="password"></form:errors>
-				${passwordError}
+				<th:block path="password" text="${passwordError}"></th:block>
+
 			</div>
 
 			<div>
@@ -93,7 +96,7 @@
 
 				<!--p>Вы забыли пароль, не расстраивайтесь <a href="#">Нажмите сюда чтобы сбросить пароль</a>.</p-->
 			</div>
-		</form:form>
+		</form>
 
 	
 	</body>

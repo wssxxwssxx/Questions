@@ -44,20 +44,20 @@
             </nav>
         </li>
         <li><a href="main">на главную</a></li>
-
         <li><h4 text="${pageContext.request.userPrincipal.name}"></h4></li>
 
-        <li> <sec:authorize access="!isAuthenticated()">
-            <h4><a href="/login">Войти</a></h4>
-            <h4><a href="/registration">Зарегистрироваться</a></h4>
+        <li><sec:authorize access="!isAuthenticated()">
+                <a href="/login">Войти</a>
             </sec:authorize>
         </li>
+        <li><a href="/registration">Зарегистрироваться</a></li>
         <li><sec:authorize access="isAuthenticated()">
             <h4><a href="/logout">Выйти</a></h4>
-        </sec:authorize></li>
+            </sec:authorize>
+        </li>
         <!--li><a href="authorized">Логин</a></-li-->
-
     </ul>
+
     <header>
 
         <h1>Вопросы и ответы<span>Для создания новой формы используйте меню слева <a href="#"></a></span></h1>
