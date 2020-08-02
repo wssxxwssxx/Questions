@@ -44,7 +44,9 @@
             </nav>
         </li>
         <li><a href="main">на главную</a></li>
+
         <li><h4 text="${pageContext.request.userPrincipal.name}"></h4></li>
+
         <li> <sec:authorize access="!isAuthenticated()">
             <h4><a href="/login">Войти</a></h4>
             <h4><a href="/registration">Зарегистрироваться</a></h4>
