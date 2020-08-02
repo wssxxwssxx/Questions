@@ -94,4 +94,8 @@ public class User implements UserDetails {
     public void setUsername(String username) {
         this.username = username;
     }
+
+    public void setRoles(Set<Role> roles) {
+        this.roles = roles;
+    }
 }
