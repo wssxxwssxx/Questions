@@ -44,10 +44,10 @@ CREATE TABLE t_question (
 -- Table: answer
 CREATE TABLE t_answer (
     answer_id INT PRIMARY KEY NOT NULL,
-    question_answe_id INT NOT NULL,
+    question_answer_id INT NOT NULL,
     name_answer VARCHAR(255) NOT NULL ,
     properly_answer BOOL  DEFAULT FALSE NOT NULL ,
 
-    FOREIGN KEY (question_answe_id) REFERENCES t_question(question_id)
+    FOREIGN KEY (question_answer_id) REFERENCES t_question(question_id)
 )
 

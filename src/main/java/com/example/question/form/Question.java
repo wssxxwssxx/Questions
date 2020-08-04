@@ -18,8 +18,9 @@ public class Question {
     @NotBlank
     private Long id;
 
-    @Size(min = 2,max = 50)
-    @Column(name = "name_question",nullable = false)
+    @Size(min = 2, max = 50)
+    @Column(name = "name_question",
+            nullable = false)
     @NotBlank
     private String name;
 

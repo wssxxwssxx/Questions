@@ -16,12 +16,15 @@ public class Answer {
     private Long id;
 
     @Size(min = 2,max = 50)
-    @Column(name = "name_answer",nullable = false)
+    @Column(name = "name_answer",
+            nullable = false)
     @NotBlank
     private String name;
 
-    @Column(name = "properly_answer",nullable = false,columnDefinition = "timestamp default now()")
-    private boolean properl = false;
+    @Column(name = "properly_answer",
+            nullable = false,
+            columnDefinition = "timestamp default now()")
+    private boolean properly = false;
 
     public Answer() {
     }
@@ -42,11 +45,11 @@ public class Answer {
         this.name = name;
     }
 
-    public boolean isProperl() {
-        return properl;
+    public boolean isProperly() {
+        return properly;
     }
 
-    public void setProperl(boolean properl) {
-        this.properl = properl;
+    public void setProperly(boolean properly) {
+        this.properly = properly;
     }
 }
