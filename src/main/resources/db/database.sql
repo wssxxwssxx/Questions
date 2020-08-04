@@ -24,3 +24,30 @@ CREATE TABLE t_user_roles (
      UNIQUE (user_id, roles_id)
 );
 
+-- Table: form
+CREATE TABLE t_form (
+    topic_id INT PRIMARY KEY NOT NULL ,
+    topic_name VARCHAR(255) NOT NULL,
+    data TIMESTAMP  DEFAULT now() NOT NULL
+
+);
+
+-- Table: question
+CREATE TABLE t_question (
+    question_id INT PRIMARY KEY NOT NULL,
+    topic_question_id INT NOT NULL ,
+    name_question VARCHAR(255) NOT NULL ,
+
+    FOREIGN KEY (topic_question_id) REFERENCES t_form (topic_id)
+);
+
+-- Table: answer
+CREATE TABLE t_answer (
+    answer_id INT PRIMARY KEY NOT NULL,
+    question_answe_id INT NOT NULL,
+    name_answer VARCHAR(255) NOT NULL ,
+    properly_answer BOOL  DEFAULT FALSE NOT NULL ,
+
+    FOREIGN KEY (question_answe_id) REFERENCES t_question(question_id)
+)
+

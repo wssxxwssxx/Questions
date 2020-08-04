@@ -4,6 +4,7 @@ import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotBlank;
 import java.util.Set;
 
 @Data
@@ -12,8 +13,11 @@ import java.util.Set;
 public class Role implements GrantedAuthority {
 
     @Id
+    @NotBlank
     private Long id;
 
+    @Column(name = "name",nullable = false)
+    @NotBlank
     private String name;
 
     @Transient
