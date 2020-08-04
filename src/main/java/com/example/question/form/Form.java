@@ -19,11 +19,14 @@ public class Form {
 
     @Size(min = 2)
     @NotBlank
-    @Column(name = "topic_name",nullable = false)
+    @Column(name = "topic_name",
+            nullable = false)
     private String name;
 
     @NotNull
-    @Column(name = "data", nullable = false, columnDefinition = "bool default true")
+    @Column(name = "data",
+            nullable = false,
+            columnDefinition = "bool default true")
     private Date data;
 
     public Form() {
