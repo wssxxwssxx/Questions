@@ -3,14 +3,15 @@ package com.example.question.service;
 
 import com.example.question.form.Question;
 import com.example.question.repository.QuestionRepository;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-
+@Repository
 public class QuestionServiceImpl implements QuestionService {
 
     private QuestionRepository questionRepository;
 
-    public void setFormRepo(QuestionRepository questionRepository) {
+    public void setQuestionRepo(QuestionRepository questionRepository) {
         this.questionRepository = questionRepository;
     }
 
@@ -29,8 +30,8 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     @Transactional
-    public Question getFormById(Long id) {
-        return this.questionRepository.getFormById(id);
+    public Question getQuestionById(Long id) {
+        return this.questionRepository.getQuestionById(id);
     }
 
     @Override

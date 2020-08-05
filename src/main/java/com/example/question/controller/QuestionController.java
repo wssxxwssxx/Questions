@@ -38,7 +38,7 @@ public class QuestionController {
 
     @RequestMapping("/edit/{id}")
     public String editForm(@PathVariable("id") Long id, Model model){
-        model.addAttribute("форма вопроса", this.questionService.getFormById(id));
+        model.addAttribute("форма вопроса", this.questionService.getQuestionById(id));
         return "вопрос";
     }
 
