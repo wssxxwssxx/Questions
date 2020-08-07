@@ -32,7 +32,7 @@ public class QuestionRepositoryImpl implements QuestionRepository {
     }
 
     @Override
-    public Question getFormById(Long id) {
+    public Question getQuestionById(Long id) {
         Session session = this.sessionFactory.getCurrentSession();
         Question question = (Question) session.load(Question.class, Long.valueOf(id));
         return question;

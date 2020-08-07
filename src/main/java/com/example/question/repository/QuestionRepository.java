@@ -9,7 +9,7 @@ public interface QuestionRepository {
 
     public void updateQuestion(Question question);
 
-    public Question getFormById(Long id);
+    public Question getQuestionById(Long id);
 
     public void delete(Long id);
 }
