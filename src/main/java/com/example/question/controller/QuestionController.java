@@ -29,14 +29,14 @@ public class QuestionController {
         return "redirect:/форма_вопроса";
     }
 
-    @RequestMapping("/remove/{id}")
+    @RequestMapping("/qwe")
     public String removeForm(@PathVariable("id") Long id){
 
         this.questionService.delete(id);
         return "redirect:/форма_вопроса";
     }
 
-    @RequestMapping("/edit/{id}")
+    @RequestMapping("/qwe/{id}")
     public String editForm(@PathVariable("id") Long id, Model model){
         model.addAttribute("форма вопроса", this.questionService.getQuestionById(id));
         return "вопрос";
