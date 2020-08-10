@@ -3,6 +3,7 @@
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
 <head>
+
     <div th:fragment="header-resources">
         <meta charset="UTF-8" />
         <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -47,8 +48,11 @@
                         </div><!-- /gn-scroller -->
                     </nav>
                 </li>
+
+
                 <li><a href="/">на главную</a></li>
                 <li><text text="${pageContext.request.userPrincipal.name}"></text>
+
                 </li>
 
                 <li><sec:authorize access="!isAuthenticated()">
