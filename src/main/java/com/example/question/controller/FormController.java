@@ -1,20 +1,26 @@
 package com.example.question.controller;
 
+import com.example.question.form.Answer;
 import com.example.question.form.Form;
+import com.example.question.form.Question;
+import com.example.question.service.AnswerService;
 import com.example.question.service.FormService;
+import com.example.question.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.*;
 
 @Controller
 public class FormController {
 
     private FormService formService;
+
+    private QuestionService questionService;
+
+
+    private AnswerService answerService;
 
     @Autowired(required=true)
     //@Qualifier(value="formService")
@@ -29,20 +35,26 @@ public class FormController {
         return "form";
     }
 
-    //For add and update form both
-    @RequestMapping(value= "/form/add", method = RequestMethod.POST)
-    public String addForm(@ModelAttribute("form") Form f){
+    // Создаем новую форму с вопросами
+    @PostMapping(value= "/newform")
+    public String addForm(@ModelAttribute("form") Form form,
+                          @ModelAttribute("question") Question question,
+                          @ModelAttribute("answer") Answer[] answers,
+                          @ModelAttribute("isTrue") boolean isTrue,
+                          Model model){
 
-        if(f.getId() == 0){
-            //new form, add it
-            this.formService.addForm(f);
-        }else{
-            //existing form, call update
-            this.formService.updateForm(f);
+        if(form.getId() == 0) {
+            //---------- добавляем форму ---------------------
+            this.formService.addForm(form);
+            //---------- добавляем пустые вопросы ------------
+            this.questionService.addQuestion(question,form.getId());
+            //----------- наполним каждый вопрос ответами ----
+                for (int j = 0; j < 3; j++) {
+                    answers[j].setProperly(isTrue);
+                    this.answerService.addAnswer(answers[j],question.getId());
+                }
         }
-
-        return "redirect:/forms";
-
+        return "redirect:/";
     }
 
     @RequestMapping("/remove/{id}")

@@ -21,26 +21,35 @@ public class AnswerRepositoryImpl implements AnswerRepository{
         this.sessionFactory = sf;
     }
 
-    public long qId;
+    private Long answerID;
 
-    @Override
-    public Long setQId(){
-        return this.qId;
+    public void setAnswerId(Long answerID){
+        this.answerID = answerID;
+    }
+
+    public Long getAnswerID() {
+        return answerID;
     }
 
     @Override
-    public void addAnswer(Answer answer, Long questionId) {
-        this.qId = questionId; //пока не понятно как передать questionId
+    public void addAnswer(Answer answer, Long id) {
+        setAnswerId(id); // передаем ссылку на ид_вопроса в новый ответ
         Session session = this.sessionFactory.getCurrentSession();
-        session.persist(answer);
+
+        // надо создать для наглядности список локальных переменных,
+        // которые будут использованы в запросе
+
+        session.createSQLQuery("INSERT INTO t_answer (question_answer_id, name_answer, properly_answer) VALUES ("
+                + getAnswerID() +", " + answer.getName()+", "+answer.isProperly() +");");
+        //session.persist(answer); //свой запрос
         logger.info("Answer saved successfully, answer Details=" + answer);
     }
 
     @Override
-    public void updateAnswer(Answer answer, Long questionId) {
-        this.qId = questionId; //пока не понятно как передать questionId
+    public void updateAnswer(Answer answer, Long id) {
+        setAnswerId(id); //пока не понятно как передать questionId
         Session session = this.sessionFactory.getCurrentSession();
-        session.update(answer); // дописать запрос
+        session.update(answer); // свой запрос
         logger.info("Answer update successfully, answer Details=" + answer);
     }
 

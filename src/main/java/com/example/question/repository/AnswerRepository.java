@@ -5,7 +5,7 @@ import java.util.List;
 
 
 public interface AnswerRepository {
-    public Long setQId();
+
     public void addAnswer(Answer answer, Long questionId);
     public void updateAnswer(Answer answer, Long questionId);
     public List<Answer> listAnswer(Long questionId);

@@ -18,14 +18,14 @@ public class QuestionServiceImpl implements QuestionService {
 
     @Override
     @Transactional
-    public void addQuestion(Question question) {
-        this.questionRepository.addQuestion(question);
+    public void addQuestion(Question question, Long id) {
+        this.questionRepository.addQuestion(question, id);
     }
 
     @Override
     @Transactional
-    public void updateQuestion(Question question) {
-        this.questionRepository.updateQuestion(question);
+    public void updateQuestion(Question question, Long id) {
+        this.questionRepository.updateQuestion(question, id);
     }
 
     @Override

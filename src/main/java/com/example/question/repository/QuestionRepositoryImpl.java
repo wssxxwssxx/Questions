@@ -7,6 +7,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class QuestionRepositoryImpl implements QuestionRepository {
+    private Long formID;
+
+
+    public void setFormID(Long formID) {
+        this.formID = formID;
+    }
+
+
+
 
     private static final Logger logger = LoggerFactory.getLogger(QuestionRepositoryImpl.class);
 
@@ -17,15 +26,18 @@ public class QuestionRepositoryImpl implements QuestionRepository {
     }
 
 
+
     @Override
-    public void addQuestion(Question question) {
+    public void addQuestion(Question question, Long id) {
+        setFormID(id); //установим ссылку на ид_формы
         Session session = this.sessionFactory.getCurrentSession();
         session.persist(question);
         logger.info("Question saved successfully, Question Details=" + question);
     }
 
     @Override
-    public void updateQuestion(Question question) {
+    public void updateQuestion(Question question, Long id) {
+        setFormID(id); //установим ссылку на ид_формы
         Session session = this.sessionFactory.getCurrentSession();
         session.update(question);
         logger.info("Question update successfully, Question Details=" + question);
