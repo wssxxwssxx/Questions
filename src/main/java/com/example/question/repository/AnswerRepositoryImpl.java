@@ -13,7 +13,7 @@ import java.util.List;
 @Repository
 public class AnswerRepositoryImpl implements AnswerRepository{
 
-    private static final Logger logger = LoggerFactory.getLogger(FormRepositoryImpl.class);
+    //private static final Logger logger = LoggerFactory.getLogger(FormRepositoryImpl.class);
 
     private SessionFactory sessionFactory;
 
@@ -42,7 +42,7 @@ public class AnswerRepositoryImpl implements AnswerRepository{
         session.createSQLQuery("INSERT INTO t_answer (question_answer_id, name_answer, properly_answer) VALUES ("
                 + getAnswerID() +", " + answer.getName()+", "+answer.isProperly() +");");
         //session.persist(answer); //свой запрос
-        logger.info("Answer saved successfully, answer Details=" + answer);
+       // logger.info("Answer saved successfully, answer Details=" + answer);
     }
 
     @Override
@@ -50,7 +50,7 @@ public class AnswerRepositoryImpl implements AnswerRepository{
         setAnswerId(id); //пока не понятно как передать questionId
         Session session = this.sessionFactory.getCurrentSession();
         session.update(answer); // свой запрос
-        logger.info("Answer update successfully, answer Details=" + answer);
+        //logger.info("Answer update successfully, answer Details=" + answer);
     }
 
     @Override
@@ -58,7 +58,7 @@ public class AnswerRepositoryImpl implements AnswerRepository{
         Session session = this.sessionFactory.getCurrentSession();
         List<Answer> answerList = session.createQuery("from Answer").list();
         for(Answer a : answerList){
-            logger.info("Answer List::"+ a);
+            //logger.info("Answer List::"+ a);
         }
         return answerList;
     }
@@ -67,7 +67,7 @@ public class AnswerRepositoryImpl implements AnswerRepository{
     public Answer getAnswerById(Long id) {
         Session session = this.sessionFactory.getCurrentSession();
         Answer answer = (Answer) session.load(Answer.class, Long.valueOf(id));
-        logger.info("Answer loaded successfully, Answer details=" + answer);
+       // logger.info("Answer loaded successfully, Answer details=" + answer);
         return answer;
     }
 
@@ -78,7 +78,7 @@ public class AnswerRepositoryImpl implements AnswerRepository{
         if(null != answer){
             session.delete(answer);
         }
-        logger.info("Answer deleted successfully, Answer details="+answer);
+       // logger.info("Answer deleted successfully, Answer details="+answer);
     }
 
     @Override

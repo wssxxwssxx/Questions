@@ -1,5 +1,5 @@
 package com.example.question.controller;
-
+/**
 import com.example.question.form.Answer;
 import com.example.question.form.Form;
 import com.example.question.form.Question;
@@ -28,12 +28,12 @@ public class FormController {
         this.formService = fs;
     }
 
-    @RequestMapping(value = "/forms", method = RequestMethod.GET)
-    public String listForms(Model model) {
-        model.addAttribute("form", new Form());
-        model.addAttribute("listForms", this.formService.listForms());
-        return "form";
-    }
+    //@RequestMapping(value = "/forms", method = RequestMethod.GET)
+    //public String listForms(Model model) {
+     //   //model.addAttribute("form", new Form());
+       //model.addAttribute("listForms", this.formService.listForms());
+      // return "form";
+    //}
 
     // Создаем новую форму с вопросами
     @PostMapping(value= "/newform")
@@ -72,3 +72,4 @@ public class FormController {
     }
 
 }
+ */

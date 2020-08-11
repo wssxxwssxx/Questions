@@ -1,44 +1,52 @@
 package com.example.question.repository;
-
+/**
 import com.example.question.form.Form;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Repository;
 
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+import java.lang.module.Configuration;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.Properties;
 
 @Repository
 public class FormRepositoryImpl implements FormRepository {
 
+
+
     private static final Logger logger = LoggerFactory.getLogger(FormRepositoryImpl.class);
 
-    private SessionFactory sessionFactory;
 
-    public void setSessionFactory(SessionFactory sf){
-        this.sessionFactory = sf;
-    }
 
     @Override
     public void addForm(Form f) {
-        Session session = this.sessionFactory.getCurrentSession();
         session.persist(f);
         logger.info("Form saved successfully, Form Details=" + f);
     }
 
     @Override
     public void updateForm(Form f) {
-        Session session = this.sessionFactory.getCurrentSession();
+
         session.update(f);
         logger.info("Form updated successfully, Form Details="+f);
     }
 
-    @SuppressWarnings("unchecked")
+
     @Override
     public List<Form> listForms() {
-        Session session = this.sessionFactory.getCurrentSession();
-        List<Form> formsList = session.createQuery("from Form").list();
+
+        List<Form> formsList = session.createQuery(" from Form").getResultList();
         for(Form f : formsList){
             logger.info("Form List::"+f);
         }
@@ -47,7 +55,7 @@ public class FormRepositoryImpl implements FormRepository {
 
     @Override
     public Form getFormById(Long id) {
-        Session session = this.sessionFactory.getCurrentSession();
+
         Form f = (Form) session.load(Form.class, Long.valueOf(id));
         logger.info("Form loaded successfully, Form details=" + f);
         return f;
@@ -55,7 +63,7 @@ public class FormRepositoryImpl implements FormRepository {
 
     @Override
     public void removeForm(Long id) {
-        Session session = this.sessionFactory.getCurrentSession();
+
         Form f = (Form) session.load(Form.class, Long.valueOf(id));
         if(null != f){
             session.delete(f);
@@ -64,3 +72,4 @@ public class FormRepositoryImpl implements FormRepository {
     }
 
 }
+ */

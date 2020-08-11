@@ -24,10 +24,10 @@ public class AnswerController {
     @RequestMapping(value = "/форма_отв", method = RequestMethod.GET)
     public String addAnswer(@ModelAttribute("answer") Answer answer){
         if(answer.getId() == 0){
-            this.answerService.addAnswer(answer);
+            //this.answerService.addAnswer(answer);
         }
         else {
-            this.answerService.updateAnswer(answer);
+            //this.answerService.updateAnswer(answer);
         }
 
         return "redirect:/форма_вопроса";

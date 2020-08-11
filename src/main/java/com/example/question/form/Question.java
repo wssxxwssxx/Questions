@@ -17,10 +17,11 @@ public class Question {
 
     @Id
     @NotBlank
+    @Column(name = "id")
     private Long id;
 
     @Size(min = 2, max = 50)
-    @Column(name = "name_question",
+    @Column(name = "name",
             nullable = false)
     @NotBlank
     private String name;

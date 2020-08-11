@@ -38,7 +38,7 @@ CREATE TABLE t_question (
     topic_question_id INT NOT NULL ,
     name_question VARCHAR(255) NOT NULL ,
 
-    FOREIGN KEY (topic_question_id) REFERENCES t_form (topic_id)
+    FOREIGN KEY (topic_question_id) REFERENCES t_form (id)
 );
 
 -- Table: answer

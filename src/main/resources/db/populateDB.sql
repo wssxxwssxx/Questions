@@ -9,3 +9,7 @@ INSERT INTO t_role VALUES (2, 'ROLE_ADMIN');
 
 -- Установить первому пользователю роль АДМИНа
 UPDATE public.t_user_roles SET (user_id, roles_id) = (1, 2);
+
+INSERT INTO t_form (id, name)  VALUES (1,'Преступление и наказание');
+INSERT INTO t_form (id, name)  VALUES  (2,'Горе от ума');
+INSERT INTO t_form (id, name)  VALUES (3,'Морской волк');
