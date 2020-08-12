@@ -1,15 +1,22 @@
 package com.example.question.service;
 
+import com.example.question.form.Form;
 import com.example.question.form.Question;
+import com.example.question.repository.QuestionRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
-public interface QuestionService {
+@Service
+public class QuestionService {
 
-    public void addQuestion(Question question);
+    @Autowired
+    QuestionRepository questionRepository;
 
-    public void updateQuestion(Question question);
+    public boolean saveQuestion(Question question, Long formId) {
+            question.setFormID(formId);           //устанавливаем ссылку на ид_формы
+            questionRepository.save(question);    //сохраняем вопрос
+        return true;
+    }
 
-    public Question getQuestionById(Long id);
-
-    public void delete(Long id);
 
 }

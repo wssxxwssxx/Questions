@@ -19,6 +19,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 @Configuration
 @EnableWebSecurity
 @EnableOAuth2Sso
+
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     UserService userService;
@@ -37,9 +38,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     //Доступ только для не зарегистрированных пользователей
                     .antMatchers("/registration").not().fullyAuthenticated()
                     .antMatchers("/authorized").not().fullyAuthenticated()
+
                     //Доступ только для пользователей с ролью Администратор
                     .antMatchers("/admin/**").hasRole("ADMIN")
-                    .antMatchers("/news").hasRole("USER")
+                    //.antMatchers("/topic").hasRole("USER")
                     //Доступ разрешен всем пользователей
                     .antMatchers("/").permitAll()
                     .antMatchers("/", "/css/**").permitAll()
