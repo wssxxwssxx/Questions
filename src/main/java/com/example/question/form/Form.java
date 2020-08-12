@@ -17,7 +17,7 @@ public class Form {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false, insertable = true, updatable = true)
+    @Column(name = "id", nullable = false, insertable = false, updatable = false)
     private Long id;
 
     @Size(min = 2)

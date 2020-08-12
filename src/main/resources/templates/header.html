@@ -52,12 +52,14 @@
 
 
                 <li><a href="/">на главную</a></li>
-                <li><text text="${user.name}"></text>
+                <li><text th:text="${authenticated} ? ${principal.username} : Гость"></text>
 
                 </li>
 
                 <li><sec:authorize access="!isAuthenticated()">
-                    <a href="/authorized">Войти</a>
+                    <!--/*@thymesVar id="isAuthenticated" type=""*/-->
+                    <!--p><sec:authentication th:text=" ПРИВЕТ" /></p-->
+                    <a href="/authorized" ><!--th:text="${isAuthenticated}? 'Войти':'Выйти'"-->Войти</a>
                 </sec:authorize>
                 </li>
                 <li><a href="/registration">Зарегистрироваться</a></li>
@@ -65,7 +67,7 @@
                     <h4><a href="/main">Выйти</a></h4>
                 </sec:authorize>
                 </li>
-                <li><a href="authorized">Логин</a></li>
+                <!--li><a href="authorized">Логин</a></li-->
             </ul>
 
 <!--            <header>-->
@@ -79,14 +81,14 @@
         </script>
     </div>
 
-<!--    <div th:fragment="footer">-->
-<!--        <div class="container">-->
-<!--            <footer>-->
-<!--                &lt;!&ndash; FOOTER &ndash;&gt;-->
-<!--                © 2020 Вопросы и ответы-->
-<!--            </footer>-->
-<!--        </div>-->
-<!--    </div>-->
+    <div th:fragment="footer">
+        <div class="container">
+            <footer>-->
+                <!--&lt;!&ndash; FOOTER &ndash;&gt;-->
+                © 2020 Вопросы и ответы-->
+            </footer>
+        </div>
+    </div>
 
 </body>
 </html>
