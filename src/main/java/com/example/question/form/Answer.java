@@ -14,15 +14,14 @@ import javax.persistence.Table;
 public class Answer {
 
     @Id
-    @NotBlank
-    @Column(name = "id")
-    private Long id;
+    @Column(name = "a_id")
+    private Long a_id;
 
     @Size(min = 2,max = 50)
-    @Column(name = "name",
+    @Column(name = "aname",
             nullable = false)
     @NotBlank
-    private String name;
+    private String aname;
 
     @Column(name = "properly_answer",
             nullable = false,
@@ -33,19 +32,19 @@ public class Answer {
     }
 
     public Long getId() {
-        return id;
+        return a_id;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.a_id = id;
     }
 
     public String getName() {
-        return name;
+        return aname;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.aname = name;
     }
 
     public boolean isProperly() {

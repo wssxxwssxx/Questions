@@ -16,8 +16,8 @@ import java.util.Date;
 public class Form {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "id", nullable = false, insertable = false, updatable = false)
+    @GeneratedValue(generator = "optimized-sequence")
+    @Column(name = "id")
     private Long id;
 
     @Size(min = 2)
