@@ -1,5 +1,5 @@
 package com.example.question.controller;
-
+/**
 import com.example.question.form.Question;
 import com.example.question.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +20,10 @@ public class QuestionController {
     @RequestMapping(value = "/форма_вопроса", method = RequestMethod.GET)
     public String addQuestion(@ModelAttribute("question")Question question){
         if(question.getId() == 0){
-            this.questionService.addQuestion(question);
+            //this.questionService.addQuestion(question);
         }
         else {
-            this.questionService.updateQuestion(question);
+            //this.questionService.updateQuestion(question);
         }
 
         return "redirect:/форма_вопроса";
@@ -43,3 +43,4 @@ public class QuestionController {
     }
 
 }
+*/

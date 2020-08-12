@@ -9,19 +9,18 @@ public class AnswerServiceImpl implements AnswerService{
 
     private AnswerRepository answerRepository;
 
-    public void setAnswerRepository(AnswerRepository answerRepository) {
+    public void setAnswerRepo(AnswerRepository answerRepository) {
         this.answerRepository = answerRepository;
     }
 
     @Override
-    public void addAnswer(Answer answer) {
-        this.answerRepository.addAnswer(answer, answerRepository.setQId()); //не верно! еще не создан вопрос
-        // и не известен его ИД
+    public void addAnswer(Answer answer , Long id) {
+        this.answerRepository.addAnswer(answer, id); // создан ответ, и передан ид_вопроса
     }
 
     @Override
-    public void updateAnswer(Answer answer) {
-        this.answerRepository.updateAnswer(answer,answerRepository.setQId());
+    public void updateAnswer(Answer answer, Long id) {
+        this.answerRepository.updateAnswer(answer, id);
     }
 
     @Override

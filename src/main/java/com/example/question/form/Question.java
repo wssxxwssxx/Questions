@@ -4,10 +4,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;
 import lombok.Data;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 
 @Data
@@ -16,31 +13,46 @@ import javax.persistence.Table;
 public class Question {
 
     @Id
-    @NotBlank
-    private Long id;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "q_id", nullable = false, insertable = true, updatable = true)
+    private Long qid;
 
     @Size(min = 2, max = 50)
-    @Column(name = "name_question",
+    @Column(name = "qname",
             nullable = false)
     @NotBlank
-    private String name;
+    private String qname;
+
+
+
+    @NotBlank
+    @Column(name= "form_id",insertable = true, updatable = true)
+    private Long formID;
 
     public Question() {
     }
 
     public Long getId() {
-        return id;
+        return qid;
     }
 
     public void setId(Long id) {
-        this.id = id;
+        this.qid = id;
     }
 
     public String getName() {
-        return name;
+        return qname;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.qname = name;
+    }
+
+    public Long getFormID() {
+        return formID;
+    }
+
+    public void setFormID(Long formID) {
+        this.formID = formID;
     }
 }

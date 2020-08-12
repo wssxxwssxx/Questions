@@ -1,62 +1,56 @@
 package com.example.question.controller;
 
+
+import com.example.question.entity.User;
 import com.example.question.form.Form;
+import com.example.question.form.Question;
 import com.example.question.service.FormService;
+import com.example.question.service.QuestionService;
+import com.example.question.service.TopicService;
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller
 public class FormController {
 
     private FormService formService;
+    private QuestionService questionService;
 
-    @Autowired(required=true)
-    //@Qualifier(value="formService")
-    public void setFormService(FormService fs){
-        this.formService = fs;
+
+    @Autowired
+    public void setQuestionService(QuestionService questionService) {
+        this.questionService = questionService;
     }
 
-    @RequestMapping(value = "/forms", method = RequestMethod.GET)
-    public String listForms(Model model) {
-        model.addAttribute("form", new Form());
-        model.addAttribute("listForms", this.formService.listForms());
-        return "form";
+    @Autowired
+    public void setFormService(FormService formService) {
+        this.formService = formService;
     }
 
-    //For add and update form both
-    @RequestMapping(value= "/form/add", method = RequestMethod.POST)
-    public String addForm(@ModelAttribute("form") Form f){
-
-        if(f.getId() == 0){
-            //new form, add it
-            this.formService.addForm(f);
-        }else{
-            //existing form, call update
-            this.formService.updateForm(f);
-        }
-
-        return "redirect:/forms";
-
+    @GetMapping("/newform")
+    public String setNewForm(Model model) {
+        model.addAttribute("nForm", new Form());
+        return "newform";
     }
 
-    @RequestMapping("/remove/{id}")
-    public String removeForm(@PathVariable("id") Long id){
-
-        this.formService.removeForm(id);
-        return "redirect:/forms";
+    @PostMapping("/newform")
+    public String addForm(@ModelAttribute("nForm")  Form form,
+                          @ModelAttribute("nQuestion") Question question,
+                          Model model) {
+        formService.saveForm(form);
+        addQuestion(question,form.getId(),model);
+        return "redirect:/topic";
+    }
+    //--------------------------------------------------------------
+    public void addQuestion(@ModelAttribute("nQuestion")Question question,Long formId, Model model) {
+        questionService.saveQuestion(question, formId);
     }
 
-    @RequestMapping("/edit/{id}")
-    public String editForm(@PathVariable("id") Long id, Model model){
-        model.addAttribute("form", this.formService.getFormById(id));
-        model.addAttribute("listForms", this.formService.listForms());
-        return "form";
-    }
 
 }
