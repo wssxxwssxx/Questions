@@ -4,12 +4,10 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 import jdk.jfr.Timestamp;
+import org.hibernate.annotations.CreationTimestamp;
 
 import javax.annotation.Generated;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 import java.util.Date;
 
@@ -18,21 +16,20 @@ import java.util.Date;
 public class Form {
 
     @Id
-    @NotNull
-    @Column(name = "id",
-            nullable = false)
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    @Column(name = "id", nullable = false, insertable = true, updatable = true)
     private Long id;
 
     @Size(min = 2)
     @NotBlank
     @Column(name = "name",
-            nullable = false)
+            nullable = true)
     private String name;
 
     @NotNull
-    @Timestamp
+    @CreationTimestamp
     @Column(name = "data",
-            nullable = false,
+            nullable = true,
             columnDefinition = "bool default true")
     private Date data;
 

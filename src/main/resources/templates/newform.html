@@ -54,13 +54,13 @@
 
 	<div th:replace="header :: header" />
 
-	<form class="newform" modelAttribute="form">
+	<form class="newform" method="post" modelAttribute="nForm">
 		<div>
-			<input style="width: 400px"type="text" placeholder="Новая Тема">
+			<input name="name" style="width: 400px"type="text"  placeholder="Новая Тема">
 		</div>
 		<div>
 				<p>Введите вопрос</p>
-				<textarea style="width: 400px; height: 250px" modelAttribute="question"></textarea>
+				<textarea name="qname" style="width: 400px; height: 250px" modelAttribute="nQuestion"></textarea>
 		</div>
 			
 		<div>

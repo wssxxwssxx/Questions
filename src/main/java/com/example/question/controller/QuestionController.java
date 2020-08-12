@@ -1,5 +1,5 @@
 package com.example.question.controller;
-
+/**
 import com.example.question.form.Question;
 import com.example.question.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,3 +43,4 @@ public class QuestionController {
     }
 
 }
+*/
