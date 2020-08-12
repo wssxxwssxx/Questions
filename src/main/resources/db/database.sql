@@ -9,7 +9,7 @@ CREATE TABLE t_user
 
 -- Table: roles
 CREATE TABLE t_role (
-       id       INT PRIMARY KEY,
+       id       SERIAL PRIMARY KEY,
        name     VARCHAR(255) NOT NULL
 );
 
@@ -26,28 +26,29 @@ CREATE TABLE t_user_roles (
 
 -- Table: form
 CREATE TABLE t_form (
-    topic_id INT PRIMARY KEY NOT NULL ,
-    topic_name VARCHAR(255) NOT NULL,
+    id SERIAL PRIMARY KEY ,
+    name VARCHAR(255) NOT NULL,
     data TIMESTAMP  DEFAULT now() NOT NULL
 
 );
 
 -- Table: question
 CREATE TABLE t_question (
-    question_id INT PRIMARY KEY NOT NULL,
-    topic_question_id INT NOT NULL ,
-    name_question VARCHAR(255) NOT NULL ,
+    q_id SERIAL PRIMARY KEY,
+    form_id INT NOT NULL,
+    qname VARCHAR(255) NOT NULL,
 
-    FOREIGN KEY (topic_question_id) REFERENCES t_form (id)
+
+    FOREIGN KEY (form_id) REFERENCES t_form (id)
 );
 
 -- Table: answer
 CREATE TABLE t_answer (
-    answer_id INT PRIMARY KEY NOT NULL,
-    question_answer_id INT NOT NULL,
-    name_answer VARCHAR(255) NOT NULL ,
+    a_id SERIAL PRIMARY KEY,
+    question_id INT NOT NULL,
+    aname VARCHAR(255) NOT NULL,
     properly_answer BOOL  DEFAULT FALSE NOT NULL ,
 
-    FOREIGN KEY (question_answer_id) REFERENCES t_question(question_id)
+    FOREIGN KEY (question_id) REFERENCES t_question(q_id)
 )
 

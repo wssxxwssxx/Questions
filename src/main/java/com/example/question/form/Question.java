@@ -13,8 +13,8 @@ import javax.persistence.*;
 public class Question {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "q_id", nullable = true, insertable = false, updatable = false)
+    @GeneratedValue(generator = "optimized-sequence")
+    @Column(name = "q_id")
     private Long qid;
 
     @Size(min = 2, max = 50)
