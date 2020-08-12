@@ -15,7 +15,7 @@ div {
 
 form {
 
-	margin-top: -250px;
+	margin-top: 30px;
     padding: 20px;
     font-family: Arial;
     font-size: 13px;
@@ -147,7 +147,6 @@ input[disabled] {
     border-color: #585858;
     cursor: not-allowed;
 }
-
 button::-moz-focus-inner, input::-moz-focus-inner {
     border: 0;
     padding: 0;
@@ -173,6 +172,5 @@ form ul li label {
     padding: 0;
     width: auto;
     margin: 0 0 0 8px;
-	color: #efefef;
+    color: #366dcd;
 }
-

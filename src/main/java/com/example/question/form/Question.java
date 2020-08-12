@@ -14,7 +14,7 @@ public class Question {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name = "q_id", nullable = false, insertable = true, updatable = true)
+    @Column(name = "q_id", nullable = true, insertable = false, updatable = false)
     private Long qid;
 
     @Size(min = 2, max = 50)
