@@ -6,26 +6,51 @@
     <!--title th:text="Testing">Title</title-->
 
     <div th:replace="header :: header-resources"/>
+
+    <link rel="stylesheet" href="css/topic.css">
 </head>
 
 
 </head>
 <body>
     <div th:replace="header :: header" />
-    <div class="container" >
-        <table>
-            <tr>
-                <th>ID</th>
-                <th>Name</th>
-                <th>Timestamp</th>
-            </tr>
-            <tr th:each="topic : ${forms}">
-                <td th:text="${topic.id}"></td>
-                <td th:text="${topic.name}"></td>
-                <td th:text="${topic.data}"></td>
-            </tr>
-        </table>
-    </div>
+    <form method="post" action="form">
+        <input type="text" name="filter">
+        <button type="submit">Найти</button>
+    </form>
+        <div class="container">
+            <table>
+                <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Timestamp</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="topic : ${forms}">
+                    <td th:text="${topic.id}"></td>
+                    <td th:text="${topic.name}"></td>
+                    <td th:text="${topic.data}"></td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+<!--        <table class="table table-bordered table-dark">-->
+<!--            <tbody>-->
+<!--            <tr>-->
+<!--                <th scope="col">ID</th>-->
+<!--                <th scope="col">Name</th>-->
+<!--                <th scope="col">Timestamp</th>-->
+<!--            </tr>-->
+<!--            <tr th:each="topic : ${forms}">-->
+<!--                <td th:text="${topic.id}"></td>-->
+<!--                <td th:text="${topic.name}"></td>-->
+<!--                <td th:text="${topic.data}"></td>-->
+<!--            </tr>-->
+<!--            </tbody>-->
+<!--        </table>-->
 
     <div th:replace="header :: footer" />
 </body>

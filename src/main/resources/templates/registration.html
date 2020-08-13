@@ -1,59 +1,59 @@
 <!DOCTYPE html>
 <html lang="ru" class="no-js"
-	   xmlns:th="http://www.thymeleaf.org"
-	   xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
-	<head>
-<!--		<script src="/logout"></script>-->
-		<title>Регистрация</title>
-		<div th:replace="header :: header-resources"/>
-	</head>
-	<body>
+	  xmlns:th="http://www.thymeleaf.org"
+	  xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+	<!--		<script src="/logout"></script>-->
+	<title>Регистрация</title>
+	<div th:replace="header :: header-resources"/>
+</head>
+<body>
 
-		<div th:replace="header :: header" />
+<div th:replace="header :: header" />
 
-		<form method="POST" modelAttribute="userForm">
-			<div>
-				<h2>Введите свой логин и пароль</h2>
-			</div>
-			<div v-if="!profile">Или авторизируйтесь через <a href="/login">Google</a></div>
-			<div>
-				<p><label for="username">Логин</label>:
-					<input id="username"
-						   type="text"
-						   name="username"
-						   placeholder="Username"
-						   autofocus="true" />
-				</p>
-				<p path="username" th:text="${usernameError}"></p>
+<form method="POST" modelAttribute="userForm">
+	<div>
+		<h2>Введите свой логин и пароль</h2>
+	</div>
+	<div v-if="!profile">Или авторизируйтесь через <a href="/login">Google</a></div>
+	<div>
+		<p><label for="username">Логин</label>:
+			<input id="username"
+				   type="text"
+				   name="username"
+				   placeholder="Username"
+				   autofocus="true" />
+		</p>
+		<p path="username" th:text="${usernameError}"></p>
 
-				<p><label for="password">Пароль</label>:
-					<input  id="password"
-							type="password"
-							name="password"
-							placeholder="type your password here" />
-				</p>
-				<!--input type="hidden" name="_csrf" value="{{_csrf.token}}"/-->
-			</div>
-			<div>
-				<p><label for="confirmPassword">Пароль еще раз</label>:
-					<input id="confirmPassword"
-						   type="password"
-						   name="passwordConfirm"
-						   placeholder="Confirm your password">
-				</p>
-				<p path="password" th:text="${passwordError}"></p>
+		<p><label for="password">Пароль</label>:
+			<input  id="password"
+					type="password"
+					name="password"
+					placeholder="type your password here" />
+		</p>
+		<!--input type="hidden" name="_csrf" value="{{_csrf.token}}"/-->
+	</div>
+	<div>
+		<p><label for="confirmPassword">Пароль еще раз</label>:
+			<input id="confirmPassword"
+				   type="password"
+				   name="passwordConfirm"
+				   placeholder="Confirm your password">
+		</p>
+		<p path="password" th:text="${passwordError}"></p>
 
-			</div>
+	</div>
 
-			<div>
-				<button type="submit">Зарегистрироваться</button>
-			</div>
-			<div>
+	<div>
+		<button type="submit">Зарегистрироваться</button>
+	</div>
+	<div>
 
-				<!--p>Вы забыли пароль, не расстраивайтесь <a href="#">Нажмите сюда чтобы сбросить пароль</a>.</p-->
-			</div>
-		</form>
+		<!--p>Вы забыли пароль, не расстраивайтесь <a href="#">Нажмите сюда чтобы сбросить пароль</a>.</p-->
+	</div>
+</form>
 
-		<div th:replace="header :: footer" />
-	</body>
+<div th:replace="header :: footer" />
+</body>
 </html>
