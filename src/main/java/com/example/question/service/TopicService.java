@@ -26,7 +26,13 @@ public class TopicService {
     }
 
     @Transactional
-    public List<Form> findByName(String name){return searchRepository.findByName(name);}
+    public List<Form> findByNameStartingWith(String name){return searchRepository.findByNameStartingWith(name);}
+
+    @Transactional
+    public List<Form> findByNameEndingWith(String name){return searchRepository.findByNameEndingWith(name);}
+
+    @Transactional
+    public List<Form> findByNameContaining(String name){return searchRepository.findByNameContaining(name);}
 
 
 }

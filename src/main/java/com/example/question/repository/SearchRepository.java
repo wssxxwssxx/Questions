@@ -9,6 +9,8 @@ import java.util.List;
 
 public interface SearchRepository extends JpaRepository<Form,Long> {
 
-    List<Form> findByName(String name);
+    List<Form> findByNameStartingWith(String name);
+    List<Form> findByNameEndingWith(String name);
+    List<Form> findByNameContaining(String name);
 
 }
