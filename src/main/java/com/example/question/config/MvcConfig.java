@@ -1,6 +1,8 @@
 package com.example.question.config;
 
+import com.example.question.util.RedirectInterceptor;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -17,5 +19,11 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("/admin").setViewName("admin");
         registry.addViewController("/form").setViewName("form");
         registry.addViewController("/topic").setViewName("topic");
+        registry.addViewController("/cabinet").setViewName("cabinet");
+    }
+
+    @Override
+    public void addInterceptors(InterceptorRegistry registry) {
+        registry.addInterceptor(new RedirectInterceptor());
     }
 }
