@@ -34,7 +34,9 @@ public class TopicController {
 
     @PostMapping("/form")
     public String filter(@RequestParam String filter, Model model){
-        model.addAttribute("forms", topicService.findByName(filter));
+        model.addAttribute("forms", topicService.findByNameStartingWith(filter));
+        model.addAttribute("forms", topicService.findByNameEndingWith(filter));
+        model.addAttribute("forms", topicService.findByNameContaining(filter));
         return "topic";
     }
 
