@@ -174,3 +174,15 @@ form ul li label {
     margin: 0 0 0 8px;
     color: #366dcd;
 }
+
+#question_field {
+    display: none;
+}
+
+#answer_field{
+    display: none;
+}
+
+#a2, #a3, #a4, #a5, #a6, #save{
+    display: none;
+}

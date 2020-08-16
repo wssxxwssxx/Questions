@@ -25,26 +25,99 @@
 
 	<form class="newform" method="post" modelAttribute="nForm">
 		<div>
-			<input name="name" style="width: 400px"type="text"  placeholder="Новая Тема">
+			<input name="name" style="width: 400px"type="text"  placeholder="Новая Тема" onchange="">
+			<img id="check" style="width: 15px; height: 15px" th:src="@{/images/green-check.jpg}" />
+		<script>
+			$(document).ready(function() {
+				$("#check").click(function() {
+					$("#question_field").toggle();
+				});
+			});
+		</script>
 		</div>
-		<div>
+		<div id="question_field">
 				<p>Введите вопрос</p>
-				<textarea name="qname" style="width: 400px; height: 150px" modelAttribute="nQuestion"></textarea>
+			<textarea name="qname" style="width: 400px; height: 150px" modelAttribute="nQuestion"></textarea>
+			<img id="check2" style="width: 15px; height: 15px" th:src="@{/images/green-check.jpg}" />
+			<script>
+				$(document).ready(function() {
+					$("#check2").click(function() {
+						$("#answer_field").toggle();
+					});
+				});
+			</script>
 		</div>
 
 			
-		<div>
+		<div id="answer_field"   >
 			<p>Введите ответы, и укажите галочкой правильные</p>
-			<ul>
-				<!--li><form><input type="text" placeholder="Новый ответ"><input type="checkbox"></form></li-->
+			<ul >
+				<li th:object="${nAnswers}" th:each="answer : ${nAnswers}">
+					<div style="border: gray solid 1px; border-radius: 4px; width: 400px">
+						<input modelAttribute="nAnswers" style="border: darkgreen solid 1px; border-radius: 4px; width: 360px"
+							   name="aname"
+							   type="text"
+							   placeholder="Новый ответ" />
+						<input modelAttribute="nAnswers"
+							   name="properly"
+							   type="checkbox" />
+						<img id="c1" style="width: 15px; height: 15px; margin-right: 5px "
+							 th:src="@{/images/green-check.jpg}"/>
+					</div>
+				</li>
+					<script>
+					$(document).ready(function() {
+						$("#c1").click(function() {
+							$("#a2").toggle();$("#save").toggle();
+						});
+					});
+					</script>
 
-				<li><fieldset style="border: gray solid 1px; border-radius: 4px; width: 400px"><input style="border: darkgreen solid 1px; border-radius: 4px; width: 360px" type="text" modelAttribute="answer" placeholder="Новый ответ"><input modelAttribute="isTrue" type="checkbox"></fieldset></li>
-				<li><fieldset style="border: gray solid 1px; border-radius: 4px; width: 400px"><input style="border: darkgreen solid 1px; border-radius: 4px; width: 360px" type="text" modelAttribute="answer" placeholder="Новый ответ"><input type="checkbox"></fieldset></li>
-				<li><fieldset style="border: gray solid 1px; border-radius: 4px; width: 400px"><input style="border: darkgreen solid 1px; border-radius: 4px; width: 360px" type="text" modelAttribute="answer" placeholder="Новый ответ"><input type="checkbox"></fieldset></li>
+				<!--li id="a2"><div style="border: gray solid 1px; border-radius: 4px; width: 400px"><input style="border: darkgreen solid 1px; border-radius: 4px; width: 360px" type="text" modelAttribute="answer" placeholder="Новый ответ"><input modelAttribute="isTrue" type="checkbox"><img id="c2" style="width: 15px; height: 15px; margin-right: 5px" th:src="@{/images/green-check.jpg}" /></div></li>
+				<script>
+					$(document).ready(function() {
+						$("#c2").click(function() {
+							$("#a3").toggle();
+
+						});
+					});
+				</script>
+				<li id="a3"><div style="border: gray solid 1px; border-radius: 4px; width: 400px"><input style="border: darkgreen solid 1px; border-radius: 4px; width: 360px" type="text" modelAttribute="answer" placeholder="Новый ответ"><input modelAttribute="isTrue" type="checkbox"><img id="c3" style="width: 15px; height: 15px; margin-right: 5px" th:src="@{/images/green-check.jpg}" /></div></li>
+				<script>
+					$(document).ready(function() {
+						$("#c3").click(function() {
+							$("#a4").toggle();
+						});
+					});
+				</script>
+				<li id="a4"><div style="border: gray solid 1px; border-radius: 4px; width: 400px"><input style="border: darkgreen solid 1px; border-radius: 4px; width: 360px" type="text" modelAttribute="answer" placeholder="Новый ответ"><input modelAttribute="isTrue" type="checkbox"><img id="c4" style="width: 15px; height: 15px; margin-right: 5px" th:src="@{/images/green-check.jpg}" /></div></li>
+				<script>
+					$(document).ready(function() {
+						$("#c4").click(function() {
+							$("#a5").toggle();
+						});
+					});
+				</script>
+				<li id="a5"><div style="border: gray solid 1px; border-radius: 4px; width: 400px"><input style="border: darkgreen solid 1px; border-radius: 4px; width: 360px" type="text" modelAttribute="answer" placeholder="Новый ответ"><input modelAttribute="isTrue" type="checkbox"><img id="c5" style="width: 15px; height: 15px; margin-right: 5px" th:src="@{/images/green-check.jpg}" /></div></li>
+				<script>
+					$(document).ready(function() {
+						$("#c5").click(function() {
+							$("#a6").toggle();
+						});
+					});
+				</script>
+				<li id="a6"><div style="border: gray solid 1px; border-radius: 4px; width: 400px"><input style="border: darkgreen solid 1px; border-radius: 4px; width: 360px" type="text" modelAttribute="answer" placeholder="Новый ответ"><input modelAttribute="isTrue" type="checkbox"><img id="c6" style="width: 15px; height: 15px; margin-right: 5px" th:src="@{/images/green-check.jpg}" /></div></li>
+				<script>
+					$(document).ready(function() {
+						$("#c6").click(function() {
+							alert("Больше 6 ответов нельзя!");
+						});
+					});
+				</script-->
 			</ul>
 		</div>
 		<div>
-			<button type="submit" href="main">Сохранить</button>
+			<button id="save" type="submit" href="main">Сохранить</button>
 			<button type="cancel" href="main">Отмена</button>
 		</div>
 	</form>

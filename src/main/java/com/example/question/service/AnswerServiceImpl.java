@@ -1,5 +1,5 @@
 package com.example.question.service;
-
+/**
 import com.example.question.form.Answer;
 import com.example.question.repository.AnswerRepository;
 import org.springframework.stereotype.Service;
@@ -38,3 +38,4 @@ public class AnswerServiceImpl implements AnswerService{
         this.answerRepository.setRightAnswer(id); //установка верного варианта ответа по ИД ответа
     }
 }
+*/
