@@ -47,6 +47,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .antMatchers("/", "/css/**").permitAll()
                     .antMatchers("/", "/js/**").permitAll()
                     .antMatchers("/", "/fonts/**").permitAll()
+                    .antMatchers("/", "/images/**").permitAll()
                     .antMatchers("/", "/header.html").permitAll()
                 //Все остальные страницы требуют аутентификации
                 .anyRequest().authenticated()

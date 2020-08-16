@@ -1,5 +1,5 @@
 package com.example.question.repository;
-
+/**
 import com.example.question.form.Answer;
 import com.example.question.form.Form;
 import org.hibernate.Session;
@@ -86,3 +86,4 @@ public class AnswerRepositoryImpl implements AnswerRepository{
         // дописать запрос
     }
 }
+*/
