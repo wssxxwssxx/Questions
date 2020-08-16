@@ -47,13 +47,14 @@ public class FormController {
 
     @GetMapping("/newform")
     public String setNewForm(Model model) {
-        ArrayList<Answer> answers = new ArrayList<>(Arrays.asList(
+        // возможность добавить три ответа за одну отправку формы:
+        Answers answers = new Answers();  //тут создается объект хранения!!!
 
-                new Answer(),
-                new Answer(),
-                new Answer(),
-                new Answer(),
-                new Answer()));
+        // три варианта ответа
+        answers.addAnswer(new Answer());
+        answers.addAnswer(new Answer());
+        answers.addAnswer(new Answer());
+
         model.addAttribute("nForm", new Form());
         model.addAttribute("nQuestion", new Question());
         model.addAttribute("nAnswers", answers );
@@ -62,23 +63,12 @@ public class FormController {
 
     @PostMapping("/newform")
     public String addForm(@ModelAttribute("nForm")  Form form,
-                          @ModelAttribute("nQuestion") Question question, Model m
-                          ){
-
-        //@ModelAttribute("nAnswers") ArrayList<Answer> answers;
-
-        ArrayList<Answer> answers = new ArrayList<>(Arrays.asList(
-
-                new Answer(),
-                new Answer(),
-                new Answer(),
-                new Answer(),
-                new Answer()));
-        m.addAttribute("nAnswers", answers);
+                          @ModelAttribute("nQuestion") Question question, Model m,
+                          @ModelAttribute("nAnswers") Answers answers){
 
         formService.saveForm(form);
         addQuestion(question,form.getId());
-        addAnswer(answers,question.getId());
+        saveAnswer(answers,question.getId());
         return "/topic";
     }
     //--------------------------------------------------------------
@@ -86,13 +76,39 @@ public class FormController {
         questionService.saveQuestion(question, formId);
     }
     //--------------------------------------------------------------
-    public void addAnswer(@ModelAttribute("nAnswers")List<Answer> answers, Long questionId) {
-        for (Answer answer: answers) {
+    public void saveAnswer(@ModelAttribute("nAnswers")Answers answers, Long questionId) {
+        for (Answer answer: answers.getAnswers()) {
             //System.out.println(answer);
-            //if (answer != null)
+            if (answer.getName() != null)
                 answerService.saveAnswer(answer, questionId);
         }
-
     }
+    //--------------------------------------------------------------
+    // класс оболочка - список ответов
+    public class Answers {
+        private List<Answer> answers ;           // здесь создаем список ответов
+
+        @Autowired
+        public Answers() {
+            this.answers = new ArrayList<>();
+        }
+
+
+        public void addAnswer(Answer answer){
+            System.out.println(answer);
+            this.answers.add(answer);            // в список добавляем ответ
+        }
+
+        public List<Answer> getAnswers() {
+            return answers;
+        }
+
+        public void setAnswers(List<Answer> answers) {
+            this.answers = answers;
+        }
+    }
+
+
+
 
 }
