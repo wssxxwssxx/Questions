@@ -20,6 +20,7 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("/form").setViewName("form");
         registry.addViewController("/topic").setViewName("topic");
         registry.addViewController("/cabinet").setViewName("cabinet");
+
     }
 
     @Override

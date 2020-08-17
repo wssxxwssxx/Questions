@@ -18,8 +18,7 @@ import java.util.Set;
 public class User implements UserDetails {
 
     @Id
-   //@GeneratedValue(strategy = GenerationType.IDENTITY)
-//    @NotBlank
+    @GeneratedValue(generator = "optimized-sequence")
     private Long id;
 
     @Size(min=2, message = "Не меньше 5 знаков")
