@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="ru" class="no-js"
       xmlns:th="http://www.thymeleaf.org"
-      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
 <head>
 
     <div th:fragment="header-resources">
@@ -14,10 +14,12 @@
         <link rel="stylesheet"  href="./css/component.css" />
         <link rel="stylesheet"  href="./css/style.css" />
         <script  src="./js/modernizr.custom.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.2.0/turbolinks.js"></script>
+        <script  src="https://cdnjs.cloudflare.com/ajax/libs/turbolinks/5.2.0/turbolinks.js"></script>
+
     </div>
 </head>
 <body>
+
     <div th:fragment="header">
     <!-- this is header -->
         <div class="container">
@@ -52,23 +54,24 @@
                 </li>
 
 
-                <li><a href="/">на главную</a></li>
-                <li><text th:text="${authenticated} ? ${principal.username} : Гость"></text>
 
+                <li><a href="/">на главную</a></li>
+                <li sec:authorize="isAuthenticated()">
+                    Authenticated username:
+                    <div sec:authentication="name"></div>
+                    Authenticated user roles:
+                    <div sec:authentication="principal.authorities"></div>
                 </li>
 
-                <li><sec:authorize access="!isAuthenticated()">
-                    <!--/*@thymesVar id="isAuthenticated" type=""*/-->
-                    <!--p><sec:authentication th:text=" ПРИВЕТ" /></p-->
-                    <a href="/authorized" ><!--th:text="${isAuthenticated}? 'Войти':'Выйти'"-->Войти</a>
-                </sec:authorize>
+                <li sec:authorize = "!isAuthenticated()">
+                    <a href="/authorized" >Войти</a>
                 </li>
                 <li><a href="/registration">Зарегистрироваться</a></li>
-                <li><sec:authorize access="isAuthenticated()">
+                <li sec:authorize = "isAuthenticated()">
                     <h4><a href="/main">Выйти</a></h4>
-                </sec:authorize>
+
                 </li>
-                <!--li><a href="authorized">Логин</a></li-->
+
             </ul>
 
 <!--            <header>-->
@@ -81,6 +84,12 @@
             new gnMenu( document.getElementById( 'gn-menu' ) );
         </script>
     </div>
+
+
+
+
+
+
 
     <div th:fragment="footer">
         <div class="container">

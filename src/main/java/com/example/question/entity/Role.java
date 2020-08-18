@@ -14,6 +14,7 @@ import java.util.Set;
 public class Role implements GrantedAuthority {
 
     @Id
+    @GeneratedValue(generator = "optimized-sequence")
     @NotBlank
     private Long id;
 
