@@ -11,27 +11,49 @@
 
 <div th:replace="header :: header" />
 
-<form method="POST" modelAttribute="userForm">
+<form  ACTION="#" th:object="${userform}" th:action="@{/registration}" method="post">
 	<div>
 		<h2>Введите свой логин и пароль</h2>
 	</div>
+
+	<div th:if="*{#fields.hasErrors()}" class="alert alert-danger">
+		<p th:text="#{username.hasError}">Error Message </p>
+	</div>
 	<div v-if="!profile">Или авторизируйтесь через <a href="/login">Google</a></div>
-	<div>
+
+	<div class="form-group" th:class="${#fields.hasErrors('username')} ? 'form-group has-error' : 'form-group'">
 		<p><label for="username">Логин</label>:
 			<input id="username"
 				   type="text"
+				   class="form-control"
 				   name="username"
+				   th:field="*{username}"
+				   th:errorclass="has-error"
 				   placeholder="Username"
-				   autofocus="true" />
+				   autofocus="true"
+				   />
 		</p>
-		<p path="username" th:text="${usernameError}"></p>
+		<span class="help-block" th:if="${#fields.hasErrors('username')}">
+			<ul>
+				<li th:each="err : ${#fields.errors('username')}" th:text="${err}" />
+			</ul>
+		</span>
+		<!--p path="username" th:text="${usernameError}"></p-->
 
 		<p><label for="password">Пароль</label>:
 			<input  id="password"
 					type="password"
 					name="password"
-					placeholder="type your password here" />
+					th:field="*{password}"
+					placeholder="type your password here"
+					/>
 		</p>
+		<span class="help-block" th:if="${#fields.hasErrors('password')}">
+			<ul>
+				<li th:each="err : ${#fields.errors('password')}" th:text="${err}" />
+			</ul>
+		</span>
+
 		<!--input type="hidden" name="_csrf" value="{{_csrf.token}}"/-->
 	</div>
 	<div>
@@ -39,9 +61,17 @@
 			<input id="confirmPassword"
 				   type="password"
 				   name="passwordConfirm"
-				   placeholder="Confirm your password">
+				   th:field="*{passwordConfirm}"
+				   placeholder="Confirm your password"
+				    />
 		</p>
-		<p path="password" th:text="${passwordError}"></p>
+
+		<span class="help-block" th:if="${#fields.hasErrors('passwordConfirm')}">
+			<ul>
+				<li th:each="err : ${#fields.errors('passwordConfirm')}" th:text="${err}" />
+			</ul>
+		</span>
+		<!--p path="password" th:text="${passwordError}"></p-->
 
 	</div>
 

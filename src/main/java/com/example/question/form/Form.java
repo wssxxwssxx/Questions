@@ -1,13 +1,13 @@
 package com.example.question.form;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Size;
+
 import jdk.jfr.Timestamp;
 import org.hibernate.annotations.CreationTimestamp;
 
 import javax.annotation.Generated;
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import java.util.Date;
 
@@ -21,7 +21,7 @@ public class Form {
     private Long id;
 
     @Size(min = 2)
-    @NotBlank
+    @NotNull
     @Column(name = "name",
             nullable = true)
     private String name;

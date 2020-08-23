@@ -36,14 +36,16 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     .disable()
                 .authorizeRequests()
                     //Доступ только для не зарегистрированных пользователей
-                    .antMatchers("/registration").not().fullyAuthenticated()
+                    //.antMatchers("/registration").not().fullyAuthenticated()
                     .antMatchers("/authorized").not().fullyAuthenticated()
 
                     //Доступ только для пользователей с ролью Администратор
                     .antMatchers("/admin/**").hasRole("ADMIN")
+
                     //.antMatchers("/topic").hasRole("USER")
                     //Доступ разрешен всем пользователей
                     .antMatchers("/").permitAll()
+                    .antMatchers("/registration").permitAll()
                     .antMatchers("/", "/css/**").permitAll()
                     .antMatchers("/", "/js/**").permitAll()
                     .antMatchers("/", "/fonts/**").permitAll()
