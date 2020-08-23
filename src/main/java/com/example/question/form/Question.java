@@ -1,10 +1,11 @@
 package com.example.question.form;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+
 import lombok.Data;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 
 @Data
@@ -20,12 +21,12 @@ public class Question {
     @Size(min = 2, max = 50)
     @Column(name = "qname",
             nullable = false)
-    @NotBlank
+    @NotNull
     private String qname;
 
 
 
-    @NotBlank
+    @NotNull
     @Column(name= "form_id",insertable = true, updatable = true)
     private Long formID;
 

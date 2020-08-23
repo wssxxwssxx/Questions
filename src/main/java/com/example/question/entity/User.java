@@ -1,14 +1,14 @@
 package com.example.question.entity;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
-import java.time.LocalDateTime;
 import java.util.Collection;
 import java.util.Set;
 
@@ -21,15 +21,21 @@ public class User implements UserDetails {
     @GeneratedValue(generator = "optimized-sequence")
     private Long id;
 
-    @Size(min=2, message = "Не меньше 5 знаков")
+    @Size(min=2, max = 20)
     @Column(name = "username", nullable = false)
-    @NotBlank
+
+    @NotNull
     private String username;
 
-    @Size(min=2, message = "Не меньше 5 знаков")
-    @NotBlank
+    @Size(min=8, max=63)
+
+    @NotNull
     @Column(name = "password", nullable = false)
     private String password;
+
+    @Size(min=8, max=63)
+
+    @NotNull
 
     @Transient
     private String passwordConfirm;

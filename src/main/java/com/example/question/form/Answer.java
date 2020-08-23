@@ -1,9 +1,10 @@
 package com.example.question.form;
 
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 
 @Entity
@@ -26,7 +27,7 @@ public class Answer {
 
 
 
-    @NotBlank
+    @NotNull
     @Column(name= "question_id")
     private Long q_id;
 

@@ -1,10 +1,11 @@
 package com.example.question.entity;
 
-import jakarta.validation.constraints.NotBlank;
+
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 
 import java.util.Set;
 
@@ -15,11 +16,11 @@ public class Role implements GrantedAuthority {
 
     @Id
     @GeneratedValue(generator = "optimized-sequence")
-    @NotBlank
+    @NotNull
     private Long id;
 
     @Column(name = "name",nullable = false)
-    @NotBlank
+    @NotNull
     private String name;
 
     @Transient
