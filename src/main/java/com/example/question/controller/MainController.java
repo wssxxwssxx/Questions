@@ -9,16 +9,16 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.HashMap;
 
-@Controller
-@RequestMapping("/")
+//@Controller
+//@RequestMapping("/")
 public class MainController {
-    @GetMapping
+   // @GetMapping
 
-    public String main(Model model, @AuthenticationPrincipal User user) {
-        HashMap<Object, Object> data = new HashMap<>();
-        data.put("profile",user);
-
-        model.addAttribute("frontendData",data);
-        return "main";
-    }
+//    public String main(Model model, @AuthenticationPrincipal User user) {
+//        HashMap<Object, Object> data = new HashMap<>();
+//        data.put("profile",user);
+//
+//        model.addAttribute("frontendData",data);
+//        return "main";
+//    }
 }
