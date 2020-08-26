@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="ru" class="no-js"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3">
+<head>
+
+    <title>Отвечаем на вопросы</title>
+    <div th:replace="header :: header-resources"/>
+
+</head>
+<body>
+
+<div th:replace="header :: header" />
+    <!-- форма с ответами на вопросы
+        - форма:
+          - поле с текстом темы (выгружаем из темы)
+          - счетчик: номер вопроса / всего вопросов
+          - поле с текстом вопроса (выгружаем вопрос по теме)
+          - поля с ответами (выгружаем по вопросу)
+          - кнопка "Далее -> " - если вопрос последний - показать кнопку "результат"
+
+    -->
+    <form class="container">
+        <label class="topic" th:text="${topicName}"> </label>
+        <p />
+        <p />
+        <div>
+            <label class="counter" th:text="${counter}"></label>
+            <label class="allQuestion" th:text="${allQuestion}"></label>
+        </div>
+        <p />
+        <p />
+        <div>
+            <!--textarea class="next-question" th:text="${nextQuestion}" readonly="true"></textarea-->
+            <ul>
+                <li class="question" th:each="question, stat : *{questionList}">
+                    <textarea class="next-question" th:text="question" readonly="true"></textarea>
+                </li>
+            </ul>
+
+        </div>
+        <p />
+        <p />
+        <div>
+            <ul>
+                <li  th:each="answer, stat : *{answerList}">
+                    <div style="border: gray solid 1px; border-radius: 4px; width: 400px">
+                        <input style="border: darkgreen solid 1px; border-radius: 4px; width: 360px"
+                               type="text"
+                               placeholder="Новый ответ"
+                               th:text=""/>
+                        <input type="checkbox" />
+                    </div>
+                </li>
+            </ul>
+        </div>
+
+    </form>
+
+
+
+
+
+
+
+
+<div th:replace="header :: footer" />
+</body>
+</html>

@@ -46,7 +46,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                     //Доступ разрешен всем пользователей
                     .antMatchers("/").permitAll()
                     .antMatchers("/ch_login").permitAll()
-
+                    .antMatchers("/answers").permitAll()
                     .antMatchers("/registration").permitAll()
                     .antMatchers("/", "/css/**").permitAll()
                     .antMatchers("/", "/js/**").permitAll()
