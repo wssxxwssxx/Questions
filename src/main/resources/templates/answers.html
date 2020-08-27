@@ -34,7 +34,7 @@
             <!--textarea class="next-question" th:text="${nextQuestion}" readonly="true"></textarea-->
             <ul>
                 <li class="question" th:each="question, stat : *{questionList}">
-                    <textarea class="next-question" th:text="question" readonly="true"></textarea>
+                    <textarea class="next-question" th:text="${question}" readonly="true"></textarea>
                 </li>
             </ul>
 
@@ -45,10 +45,7 @@
             <ul>
                 <li  th:each="answer, stat : *{answerList}">
                     <div style="border: gray solid 1px; border-radius: 4px; width: 400px">
-                        <input style="border: darkgreen solid 1px; border-radius: 4px; width: 360px"
-                               type="text"
-                               placeholder="Новый ответ"
-                               th:text=""/>
+                        <label th:text="${answer}"/>
                         <input type="checkbox" />
                     </div>
                 </li>

@@ -13,9 +13,11 @@ import javax.validation.constraints.Size;
 @Table(name = "t_question")
 public class Question {
 
+
+
     @Id
     @GeneratedValue(generator = "optimized-sequence")
-    @Column(name = "q_id")
+    @Column(name = "qid")
     private Long qid;
 
     @Size(min = 2, max = 50)
@@ -33,12 +35,12 @@ public class Question {
     public Question() {
     }
 
-    public Long getId() {
+    public Long getQid() {
         return qid;
     }
 
-    public void setId(Long id) {
-        this.qid = id;
+    public void setQid(Long q_id) {
+        this.qid = q_id;
     }
 
     public String getName() {

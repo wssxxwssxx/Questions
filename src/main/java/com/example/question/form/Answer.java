@@ -14,7 +14,7 @@ public class Answer {
     @Id
     @GeneratedValue(generator = "optimized-sequence")
     @Column(name = "a_id")
-    private Long a_id;
+    private Long aId;
 
     @Size(min = 2, max = 50)
     @Column(name = "aname",
@@ -25,21 +25,19 @@ public class Answer {
             nullable = false)
     private boolean properly = false;
 
-
-
     @NotNull
     @Column(name= "question_id")
-    private Long q_id;
+    private Long questionId;
 
     public Answer() {
     }
 
     public Long getId() {
-        return a_id;
+        return aId;
     }
 
     public void setId(Long id) {
-        this.a_id = id;
+        this.aId = id;
     }
 
     public String getName() {
@@ -58,11 +56,11 @@ public class Answer {
         this.properly = properly;
     }
 
-    public Long getQ_id() {
-        return q_id;
+    public Long getQuestionId() {
+        return questionId;
     }
 
-    public void setQ_id(Long q_id) {
-        this.q_id = q_id;
+    public void setQuestionId(Long questionId) {
+        this.questionId = questionId;
     }
 }

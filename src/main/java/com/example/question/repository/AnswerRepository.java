@@ -8,7 +8,7 @@ import java.util.Map;
 
 
 public interface AnswerRepository extends JpaRepository<Answer,Long> {
-    List<Answer> getAnswersByQ_id(Long qId);
-    List<Answer> getAnswersByQ_idOrderByProperly(Long qId);
+    List<Answer> getAnswersByQuestionId(Long id);
+    List<Answer> getAnswersByQuestionIdOrderByProperlyAsc(Long id);
 
 }

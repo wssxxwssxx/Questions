@@ -1,3 +1,6 @@
+--добавить юзера
+INSERT INTO t_user (id, password, username) VALUES (1, '12345678','user1')
+
 --Установим две роли (ЮЗЕР и АДМИН)
 
 INSERT INTO t_role VALUES (1, 'ROLE_USER');

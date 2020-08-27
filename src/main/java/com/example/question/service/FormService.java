@@ -36,7 +36,7 @@ public class FormService {
     }
 
     public Long getIdByName(String name){
-         return formRepository.findByFormName(name).getId();
+         return formRepository.getFormByName(name).getId();
     }
 
 }

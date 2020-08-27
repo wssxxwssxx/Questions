@@ -1,4 +1,3 @@
-
 -- Table: users
 CREATE TABLE t_user
 (
@@ -34,21 +33,21 @@ CREATE TABLE t_form (
 
 -- Table: question
 CREATE TABLE t_question (
-    q_id SERIAL PRIMARY KEY,
-    form_id INT NOT NULL,
+    qId SERIAL PRIMARY KEY,
+    formId INT NOT NULL,
     qname VARCHAR(255) NOT NULL,
 
 
-    FOREIGN KEY (form_id) REFERENCES t_form (id)
+    FOREIGN KEY (formId) REFERENCES t_form (id)
 );
 
 -- Table: answer
 CREATE TABLE t_answer (
-    a_id SERIAL PRIMARY KEY,
-    question_id INT NOT NULL,
+    aId SERIAL PRIMARY KEY,
+    questionId INT NOT NULL,
     aname VARCHAR(255) NOT NULL,
-    properly_answer BOOL  DEFAULT FALSE NOT NULL ,
+    properly BOOL  DEFAULT FALSE NOT NULL ,
 
-    FOREIGN KEY (question_id) REFERENCES t_question(q_id)
+    FOREIGN KEY (questionId) REFERENCES t_question(qId)
 )
 
