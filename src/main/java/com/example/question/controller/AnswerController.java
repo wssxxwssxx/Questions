@@ -26,10 +26,10 @@ import java.util.*;
     public int counter;
     public int allQuestion;
 
-    public List<String> questionList;
-    public List<String> answerList;
-    public Map<Long, Boolean> allAnswers;
-    public List<Answer> correctAnswers;
+    public List<String> questionList = new ArrayList<>();
+    public List<String> answerList = new ArrayList<>();
+    public Map<Long, Boolean> allAnswers = new HashMap<>();
+    public List<Answer> correctAnswers = new ArrayList<>();
 
     @Autowired
     public void setAnswerService(AnswerService answerService) {
@@ -48,12 +48,12 @@ import java.util.*;
 
     @GetMapping(value = "/answers")
     public String addAnswer(String name,Model model ){
-        if (name == null || name.isEmpty()){
-            return "redirect:/topic";
-        }
+        //if (name == null || name.isEmpty()){
+          //  return "#";
+        //}
 
-        setTopicName(name);
-        this.tId = formService.getIdByName(name);
+        setTopicName("Преступление и наказание");
+        this.tId = 3000L;//formService.getIdByName(name);
         loadFromDb(this.tId);
         model.addAttribute("topicName", this.topicName);
         model.addAttribute("questionList", this.questionList);
@@ -71,32 +71,31 @@ import java.util.*;
         // вытянуть вопросы в массив +
         // ответы массив +
         // вытянуть ответы +
-
+        int qq = questionService.getQuestionsByFormId(tId).size(); //3
         // Loading questions
-        this.questionList = new ArrayList<>();
-        for (int i = 0; i < questionService.getQuestionsByFormId(tId).size(); i++) {
+
+        for (int i = 0; i < 1 ; i++) {
             this.questionList.add(questionService.getQuestionsByFormId(tId).get(i).getName());
-            this.qId = questionService.getQuestionsByFormId(tId).get(i).getId();
-            loadAnswers(this.qId);
+            this.qId = questionService.getQuestionsByFormId(tId).get(i).getQid();
+            loadAnswers(this.qId, qq);
         }
     }
 
-    public void loadAnswers (Long qID) {
-        this.answerList = new ArrayList<>();
-        this.allAnswers = new HashMap<>();
+    public void loadAnswers (Long qID, int qq) {
 
+        int qa = answerService.getAnswersByQuestionId(qID).size(); //6
         // Loading all answers
-        for (int j =0; j < answerService.getAnswersByQuestionId(qID).size(); j++){
+        for (int j =0; j < 6; j++){
             this.answerList.add(answerService.getAnswersByQuestionId(qID).get(j).getName());
-            this.allAnswers.put(answerService.getAnswersByQuestionId(qID).get(j).getId(),
-                    answerService.getAnswersByQuestionId(qID).get(j).getProperly());
+            //this.allAnswers.put(answerService.getAnswersByQuestionId(qID).get(j).getId(),
+              //      answerService.getAnswersByQuestionId(qID).get(j).getProperly());
         }
 
         // Loading correct answers ONLY!
-        for (int k =0; k < answerService.getAnswersByQuestionIdOrderByProperly(qID).size(); k++) {
-            if(answerService.getAnswersByQuestionIdOrderByProperly(qID).get(k).getProperly())
-                this.correctAnswers.add(answerService.getAnswersByQuestionIdOrderByProperly(qID).get(k));
-        }
+//        for (int k =0; k < answerService.getAnswersByQuestionIdOrderByProperly(qID).size(); k++) {
+//            if(answerService.getAnswersByQuestionIdOrderByProperly(qID).get(k).getProperly())
+//                this.correctAnswers.add(answerService.getAnswersByQuestionIdOrderByProperly(qID).get(k));
+//        }
     }
 
     public String getTopicName() {

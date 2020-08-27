@@ -8,6 +8,6 @@ import org.springframework.data.repository.CrudRepository;
 import java.util.List;
 
 public interface FormRepository extends JpaRepository<Form,Long> {
-    Form findByFormName(String formName);
+    Form getFormByName(String formName);
 
 }

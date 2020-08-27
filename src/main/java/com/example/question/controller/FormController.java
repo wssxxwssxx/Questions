@@ -1,14 +1,12 @@
 package com.example.question.controller;
 
 
-import com.example.question.entity.User;
 import com.example.question.form.Answer;
 import com.example.question.form.Form;
 import com.example.question.form.Question;
 import com.example.question.service.AnswerService;
 import com.example.question.service.FormService;
 import com.example.question.service.QuestionService;
-import com.example.question.service.TopicService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -16,11 +14,8 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -68,7 +63,7 @@ public class FormController {
 
         formService.saveForm(form);
         addQuestion(question,form.getId());
-        saveAnswer(answers,question.getId());
+        saveAnswer(answers,question.getQid());
         return "/topic";
     }
     //--------------------------------------------------------------

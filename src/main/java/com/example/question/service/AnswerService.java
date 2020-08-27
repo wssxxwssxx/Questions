@@ -16,7 +16,7 @@ public class AnswerService {
 
 
     public boolean saveAnswer(Answer answer, Long questionId) {
-        answer.setQ_id(questionId);           //устанавливаем ссылку на ид_вопроса
+        answer.setQuestionId(questionId);           //устанавливаем ссылку на ид_вопроса
         answerRepository.save(answer);              //сохраняем вопрос
         return true;
     }
@@ -30,10 +30,10 @@ public class AnswerService {
     }
 
     public List<Answer> getAnswersByQuestionId(Long id){
-        return answerRepository.getAnswersByQ_id(id);
+        return answerRepository.getAnswersByQuestionId(id);
     }
 
     public List<Answer> getAnswersByQuestionIdOrderByProperly(Long id){
-        return answerRepository.getAnswersByQ_idOrderByProperly(id);
+        return answerRepository.getAnswersByQuestionIdOrderByProperlyAsc(id);
     }
 }
