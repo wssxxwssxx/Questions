@@ -27,6 +27,8 @@ public class User implements UserDetails {
     @NotBlank
     private String username;
 
+    private String filename;
+
     @Size(min=2, message = "Не меньше 5 знаков")
     @NotBlank
     @Column(name = "password", nullable = false)
@@ -109,5 +111,13 @@ public class User implements UserDetails {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 }
