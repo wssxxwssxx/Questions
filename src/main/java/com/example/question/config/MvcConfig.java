@@ -26,8 +26,8 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("/results").setViewName("results");
     }
 
-    @Override
-    public void addInterceptors(InterceptorRegistry registry) {
-        registry.addInterceptor(new RedirectInterceptor());
-    }
+//    @Override
+//    public void addInterceptors(InterceptorRegistry registry) {
+//        registry.addInterceptor(new RedirectInterceptor());
+//    }
 }
