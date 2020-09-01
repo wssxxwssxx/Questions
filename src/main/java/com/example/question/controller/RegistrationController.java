@@ -32,6 +32,7 @@ public class RegistrationController {
     public String addUser(@Valid @ModelAttribute("userform") User userform, BindingResult bindingResult) {
 
         if (bindingResult.hasErrors()) {
+
             return "registration";
         }
 //        if (!userForm.getPassword().equals(userForm.getConfirm())){
