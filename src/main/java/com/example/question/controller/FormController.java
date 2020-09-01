@@ -9,6 +9,7 @@ import com.example.question.service.FormService;
 import com.example.question.service.QuestionService;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,6 +25,8 @@ public class FormController {
     private FormService formService;
     private QuestionService questionService;
     private AnswerService answerService;
+    @Autowired
+    private IAuthenticationFacade authenticationFacade;
 
     @Autowired
     public void setAnswerService(AnswerService answerService) {
@@ -42,6 +45,9 @@ public class FormController {
 
     @GetMapping("/newform")
     public String setNewForm(Model model) {
+        Authentication authentication = authenticationFacade.getAuthentication();
+        model.addAttribute("guestname", authentication.getName());
+
         // возможность добавить три ответа за одну отправку формы:
         Answers answers = new Answers();  //тут создается объект хранения!!!
 
