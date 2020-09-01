@@ -27,6 +27,8 @@ public class User implements UserDetails {
     @NotNull
     private String username;
 
+    private String filename;
+
     @Size(min=8, max=63)
 
     @NotNull
@@ -114,5 +116,13 @@ public class User implements UserDetails {
 
     public void setRoles(Set<Role> roles) {
         this.roles = roles;
+    }
+
+    public String getFilename() {
+        return filename;
+    }
+
+    public void setFilename(String filename) {
+        this.filename = filename;
     }
 }
