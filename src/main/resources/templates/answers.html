@@ -20,21 +20,28 @@
           - кнопка "Далее -> " - если вопрос последний - показать кнопку "результат"
 
     -->
-    <form class="container">
+    <form class="container" >
         <label class="topic" th:text="${topicName}"> </label>
         <p />
+        <div th:if="${allQuestion > 1}">
+            <span th:each="i : ${#numbers.sequence(1, allQuestion)}">
+                <a th:if="${counter != i}" th:href="@{'/answers/' + ${i}}">[[${i}]]</a>
+                <span th:unless="${counter != i}" >[[${i}]]</span> &nbsp; &nbsp;
+            </span>
+
+
         <p />
         <div>
-            <label class="counter" th:text="${counter}"></label>
-            <label class="allQuestion" th:text="${allQuestion}"></label>
+            <label>Номер вопроса: </label><label class="counter" th:text="${counter}"></label>
+            <label>  Всего вопросов: </label><label class="allQuestion" th:text="${allQuestion}"></label>
         </div>
         <p />
         <p />
         <div>
             <!--textarea class="next-question" th:text="${nextQuestion}" readonly="true"></textarea-->
             <ul>
-                <li class="question" th:each="question, stat : *{questionList}">
-                    <textarea class="next-question" th:text="${question}" readonly="true"></textarea>
+                <li class="question" th:each="question, stat : *{qList}">
+                    <textarea class="next-question" th:text="*{qList[__${stat.index}__].name}" readonly="true"></textarea>
                 </li>
             </ul>
 
@@ -51,7 +58,7 @@
                 </li>
             </ul>
         </div>
-
+        </div>
     </form>
 
 
