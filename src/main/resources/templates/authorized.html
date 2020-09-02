@@ -11,7 +11,7 @@
 		<sec:authorize access="isAuthenticated()">
 			<% response.sendRedirect("/main"); %>
 		</sec:authorize>
-
+		<!--/*@thymesVar id="guestname" type="guestname"*/-->
 		<div th:replace="header :: header" />
 		<form method="POST" action="/authorized">
 			<div>

@@ -56,11 +56,12 @@
 
 
                 <li><a href="/">на главную</a></li>
-                <li sec:authorize="isAuthenticated()">
+                <!--/*@thymesVar id="guestname" type="guestname"*/-->
+                <li  sec:authorize="isAuthenticated()" th:text="${guestname} == 'anonymousUser' ? 'Г О С Т Ь' : ${guestname}">
                     Authenticated username:
-                    <div sec:authentication="name"></div>
-                    Authenticated user roles:
-                    <div sec:authentication="principal.authorities"></div>
+                    <div sec:authentication=""></div>
+                    <!--Authenticated user roles:
+                    <div sec:authentication="principal.username"></div-->
                 </li>
 
                 <li sec:authorize = "!isAuthenticated()">
