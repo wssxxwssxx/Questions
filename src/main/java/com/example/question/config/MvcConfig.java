@@ -1,8 +1,6 @@
 package com.example.question.config;
 
-import com.example.question.util.RedirectInterceptor;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
@@ -24,6 +22,7 @@ public class MvcConfig implements WebMvcConfigurer {
         registry.addViewController("/ch_chat").setViewName("ch_chat");
         registry.addViewController("/answers/**").setViewName("answers");
         registry.addViewController("/results").setViewName("results");
+        registry.addViewController("/chat").setViewName("chat");
     }
 
 //    @Override

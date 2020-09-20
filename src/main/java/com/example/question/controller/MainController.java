@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.HashMap;
 
 @Controller
-//@RequestMapping("/")
+//@RequestMapping("/main")
 public class MainController {
     @Autowired
     private IAuthenticationFacade authenticationFacade;
