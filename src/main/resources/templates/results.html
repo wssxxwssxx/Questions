@@ -12,6 +12,22 @@
 
 <div th:replace="header :: header" />
 
+<div class="container">
+    <ul>
+        <li class="answers">
+            <span>Количество правильных ответов: </span>
+            <span th:text="${trueAnswers}" ></span>
+        </li>
+    </ul>
+
+</div>
+
+
+
+
+
+
+
 <div th:replace="header :: footer" />
 </body>
 </html>

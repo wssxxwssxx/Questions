@@ -29,6 +29,10 @@ public class Answer {
     @Column(name= "question_id")
     private Long questionId;
 
+    @Column(name = "user_answer",
+            nullable = false)
+    private boolean userAnswer = false;
+
     public Answer() {
     }
 
@@ -62,5 +66,13 @@ public class Answer {
 
     public void setQuestionId(Long questionId) {
         this.questionId = questionId;
+    }
+
+    public boolean isUserAnswer() {
+        return userAnswer;
+    }
+
+    public void setUserAnswer(boolean userAnswer) {
+        this.userAnswer = userAnswer;
     }
 }

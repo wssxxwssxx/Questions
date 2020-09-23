@@ -1,5 +1,5 @@
 --добавить юзера
-INSERT INTO t_user (id, password, username) VALUES (1, 'password','useruser')
+INSERT INTO t_user (id, password, username) VALUES (1, 'password','useruser');
 UPDATE t_user set (id, password, username) = (1, '$2b$10$NMb3gV1vUFrCvgEk3oszpuMD/AqlvulWjl4WYr5RAi4PWZy8qpr4W','useruser');
 --Установим две роли (ЮЗЕР и АДМИН)
 
@@ -23,3 +23,7 @@ UPDATE t_form SET id = DEFAULT;
 
 ALTER SEQUENCE t_question_q_id_seq RESTART WITH 1;
 UPDATE t_question SET q_id = DEFAULT;
+
+SELECT *  t_tempresult tr, t_answer a WHERE (tr.answerId = a_id) AND (tr.userresult = a.properly);
+
+SELECT COUNT FROM t_tempresult tr, t_answer a WHERE (tr.answerId = a_id) AND (tr.userresult = a.properly);
