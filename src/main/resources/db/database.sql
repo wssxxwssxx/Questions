@@ -43,11 +43,20 @@ CREATE TABLE t_question (
 
 -- Table: answer
 CREATE TABLE t_answer (
-    aId SERIAL PRIMARY KEY,
+    a_id SERIAL PRIMARY KEY,
     questionId INT NOT NULL,
     aname VARCHAR(255) NOT NULL,
     properly BOOL  DEFAULT FALSE NOT NULL ,
+    user_answer BOOL  DEFAULT FALSE NOT NULL,
 
     FOREIGN KEY (questionId) REFERENCES t_question(qId)
-)
+);
 
+-- Table: answer
+CREATE TABLE t_tempresult (
+    id SERIAL PRIMARY KEY,
+    answerId INT NOT NULL,
+    userResult BOOL  DEFAULT FALSE NOT NULL ,
+
+    FOREIGN KEY (answerId) REFERENCES t_answer (a_id)
+);

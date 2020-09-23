@@ -21,6 +21,12 @@ public class AnswerService {
         return true;
     }
 
+    //public boolean updateAnswer(Answer answer, Long questionId) {
+    //    answer.setQuestionId(questionId);
+    //    answerRepository.
+    //}
+
+
     public boolean delete(Long id){
         if (answerRepository.findById(id).isPresent()) {
             answerRepository.deleteById(id);
@@ -36,4 +42,5 @@ public class AnswerService {
     public List<Answer> getAnswersByQuestionIdOrderByProperly(Long id){
         return answerRepository.getAnswersByQuestionIdOrderByProperlyAsc(id);
     }
+
 }

@@ -20,7 +20,7 @@
           - кнопка "Далее -> " - если вопрос последний - показать кнопку "результат"
 
     -->
-    <form class="container" >
+    <form class="container" th:method="post" th:action="@{/results}" >
         <label class="topic" th:text="${topicName}"> </label>
         <p />
         <div th:if="${allQuestion > 1}">
@@ -48,19 +48,26 @@
         </div>
         <p />
         <p />
-        <div>
-            <ul>
-                <li  th:each="answer, stat : *{answerList}">
+        <div  th:object="${uAnswers}">
+            <ul >
+                <li  th:each="answer, stat : *{answers}">
                     <div style="border: gray solid 1px; border-radius: 4px; width: 400px">
-                        <label th:text="${answer}"/>
-                        <input type="checkbox" />
+                        <!--label th:text="*{answerList[__${stat.index}__].getName()}"/>
+                        <input th:object="${resultMap}" type="checkbox"
+                        th:checked="${com.example.question.controller.AnswerController.setChange(*{answerList[__${stat.index}__].getId()})}" /-->
+
+                        <label th:text="*{answers[__${stat.index}__].getName()}"/>
+                        <input th:field="*{answers[__${stat.index}__].userAnswer}" type="checkbox" />
                     </div>
                 </li>
             </ul>
         </div>
         </div>
+        <button class="btn" th:object="${uAnswers}" th:action="@{/results}" th:text="Результат" type="submit"></button>
     </form>
 
+
+    </form>
 
 
 
