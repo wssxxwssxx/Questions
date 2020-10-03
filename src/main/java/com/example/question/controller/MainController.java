@@ -30,6 +30,11 @@ public class MainController {
 
     private String Name;
 
+    @RequestMapping("/game")
+    public String chat(){
+        return "game";
+    }
+
     @GetMapping("/main")
     public String main(Model model, @AuthenticationPrincipal User user) {
 //        HashMap<Object, Object> data = new HashMap<>();

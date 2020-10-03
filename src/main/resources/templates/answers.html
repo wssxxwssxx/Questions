@@ -20,53 +20,56 @@
           - кнопка "Далее -> " - если вопрос последний - показать кнопку "результат"
 
     -->
-    <form class="container" th:method="post" th:action="@{/results}" >
-        <label class="topic" th:text="${topicName}"> </label>
+    <form class="container" th:method="post" th:object="${answerListMap}">
+        <fieldset>
+        <h2 class="topic" th:text="${topicName}"> </h2>
         <p />
-        <div th:if="${allQuestion > 1}">
+        <!--div th:if="${allQuestion > 1}">
             <span th:each="i : ${#numbers.sequence(1, allQuestion)}">
                 <a th:if="${counter != i}" th:href="@{'/answers/' + ${i}}">[[${i}]]</a>
                 <span th:unless="${counter != i}" >[[${i}]]</span> &nbsp; &nbsp;
             </span>
 
 
-        <p />
-        <div>
+        <p /-->
+        <!--div>
             <label>Номер вопроса: </label><label class="counter" th:text="${counter}"></label>
             <label>  Всего вопросов: </label><label class="allQuestion" th:text="${allQuestion}"></label>
-        </div>
+        </div-->
         <p />
         <p />
-        <div>
-            <!--textarea class="next-question" th:text="${nextQuestion}" readonly="true"></textarea-->
+        <div >
             <ul>
-                <li class="question" th:each="question, stat : *{qList}">
-                    <textarea class="next-question" th:text="*{qList[__${stat.index}__].name}" readonly="true"></textarea>
-                </li>
-            </ul>
 
-        </div>
-        <p />
-        <p />
-        <div  th:object="${uAnswers}">
-            <ul >
-                <li  th:each="answer, stat : *{answers}">
-                    <div style="border: gray solid 1px; border-radius: 4px; width: 400px">
-                        <!--label th:text="*{answerList[__${stat.index}__].getName()}"/>
-                        <input th:object="${resultMap}" type="checkbox"
-                        th:checked="${com.example.question.controller.AnswerController.setChange(*{answerList[__${stat.index}__].getId()})}" /-->
+                <li class="question" th:each="question, stat : ${allItems}"
+                                     th:with="newQuest=${answerListMap.entrySet()}, newSet=${answerListMap.keySet()}">
+                    <textarea class="next-question" th:field="*{keySet()[__${stat.index}__].name}"
+                                                    th:text="${question.key.getName()}" readonly="true" ></textarea>
+                    <div >
+                        <ul>
+                            <li  th:each="ans, stat2 :${question.value}">
+                                    <label th:field="${newQuest[__${stat.index}__].value[__${stat2.index}__].id}"
+                                           th:text="${question.value[__${stat2.index}__].getId()}"
+                                    />
 
-                        <label th:text="*{answers[__${stat.index}__].getName()}"/>
-                        <input th:field="*{answers[__${stat.index}__].userAnswer}" type="checkbox" />
+                                    <label th:field="${newQuest[__${stat.index}__].value[__${stat2.index}__].name}"
+                                           th:text="${question.value[__${stat.index}__].getName()}"
+                                    />
+
+                                    <input th:field="${newQuest[__${stat.index}__].value[__${stat2.index}__].userAnswer}"
+                                           th:value="${question.value[__${stat.index}__].userAnswer}" type="checkbox" />
+                            </li>
+                            <p />
+                            <p />
+
+                        </ul>
                     </div>
                 </li>
             </ul>
         </div>
-        </div>
-        <button class="btn" th:object="${uAnswers}" th:action="@{/results}" th:text="Результат" type="submit"></button>
-    </form>
 
-
+        <button class="btn" th:text="Результат" type="submit"></button>
+        </fieldset>
     </form>
 
 

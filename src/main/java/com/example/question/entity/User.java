@@ -23,7 +23,6 @@ public class User implements UserDetails {
 
     @Size(min=2, max = 20)
     @Column(name = "username", nullable = false)
-
     @NotNull
     private String username;
 
