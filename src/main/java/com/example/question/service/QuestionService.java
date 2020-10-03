@@ -24,10 +24,14 @@ public class QuestionService {
         return true;
     }
 
-    public Page<Question> getQuestionsByFormId(Long id, Pageable pageable, int pageNo, int pageSize){
-        Pageable p = pageable;
-        p = PageRequest.of(pageNo-1, pageSize);
-        return questionRepository.getQuestionsByFormID(id, p);
+    //public Page<Question> getQuestionsByFormId(Long id, Pageable pageable, int pageNo, int pageSize){
+    //    Pageable p = pageable;
+    //    p = PageRequest.of(pageNo-1, pageSize);
+    //    return questionRepository.getQuestionsByFormID(id, p);
+    //}
+
+    public List<Question> getQuestionsByFormId(Long id){
+        return questionRepository.getQuestionsByFormID(id);
     }
 
 }

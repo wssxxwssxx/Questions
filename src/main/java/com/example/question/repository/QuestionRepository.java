@@ -9,6 +9,6 @@ import java.util.List;
 
 
 public interface QuestionRepository extends JpaRepository<Question, Long> {
-    //List<Question> getQuestionsByFormID(Long formId);
-    Page<Question> getQuestionsByFormID(Long formId, Pageable pageable);
+    List<Question> getQuestionsByFormID(Long formId);
+    //Page<Question> getQuestionsByFormID(Long formId, Pageable pageable);
 }

@@ -33,21 +33,21 @@ import java.util.*;
     private TempResultService TRS;
 
 
-    private String topicName;
+    private String topicName;                               //Название темы
     public Long tId;                                        //ИД_ТЕМЫ
     public Long qId;                                        //ИД_ВОПРОСА
-    //public int counter;                                     //указатель на текущий вопрос
-    //public int allQuestion;                                 //общее количество вопросов в теме
-    public List<Boolean> userAnswer;                        //список ответов пользователя???
+    int allAnswerCount =0;
+    //List <Boolean> correct;
+    boolean[] correct =null;
+    //Answers2 answers;
+    public List<Question> questionList;        //Список вопросов???
 
+    public Questions questions;
 
-    public Page<Question> questionList;                     //список вопросов отображаемых постранично, по 1 вопросу на странице
-   // public List<answerStructure> answerList;                         //список ответов, по шесть ответов на 1 вопрос
+    public Map<Question, List<Answer>> questionListMap;
+    public Map<Question, List<Answer>> answerListMap;
 
-
-    public List<Question> qList= new ArrayList<>();         //Список вопросов???
-
-    Answers2 answers2 = new Answers2();  //тут создается объект хранения!!!
+    //Answers2 answers2 = new Answers2();  //тут создается объект хранения!!!
 
     @Autowired
     public void setAnswerService(AnswerService answerService) {
@@ -70,77 +70,156 @@ import java.util.*;
     }
 
 
-    @GetMapping(value = "/answers/{pageNo}")
-    public String addAnswer(@PathVariable (value = "pageNo") int pageNo,
-                            Model model,
-                            @PageableDefault(sort = {"qid"},
-                                            direction = Sort.Direction.ASC) Pageable pageable){
+    @GetMapping(value = "/answers")
+    public String addAnswer(Model model){
+        //correct = new boolean[100];
+
+        questionListMap = new HashMap<>();
+        answerListMap = new HashMap<>();
 
 
-        int pageSize = 1; //показ постранично(повопросно!)
 
         //-----------------ТУТ ИСПРАВИТЬ НА ДИНАМИКУ--------------------------------
         setTopicName("Преступление и наказание");
         this.tId = 3000L;//formService.getIdByName(name);
         //-------------------------------------------------------------------------
 
-        loadFromDb(this.tId, pageable, pageNo, pageSize);                          //выгрузка из базы
+        //loadFromDb(this.tId, this.questionList);                          //выгрузка из базы
+        load(this.tId);
 
-        //                  собираем модель, т.е передаем во вьюшку наши переменные:
-        model.addAttribute("qList", this.qList);                                //список вопросов получаем из контента страницы
         model.addAttribute("topicName", this.topicName);                        //название темы
-        model.addAttribute("questionList", this.questionList);                  //Страница с текущим вопросом
-        model.addAttribute("counter", pageNo);                                  //номер страницы(он же номер вопроса -1)
-        model.addAttribute("allQuestion", questionList.getTotalElements());     //общее количество вопросов
-        model.addAttribute("uAnswers", answers2);                               //список гребаных ответов
+       // model.addAttribute("questionList", this.questionList);                  //Страница с текущим вопросом
+        model.addAttribute("allItems", this.questionListMap);
+       // model.addAttribute("questionsMap", this.questionListMap); //список вопросов
+        model.addAttribute("answerListMap", this.answerListMap);
+
+
+
+
 
         return "answers";
     }
 
-    public void loadFromDb(Long qid, Pageable pageable, int pageNumber, int pageSize) {
 
-
-        questionList = questionService.getQuestionsByFormId(this.tId, pageable, pageNumber, pageSize);
-        qList = questionList.getContent();
-        this.qId = qList.get(0).getQid();
-
-        int qq = answerService.getAnswersByQuestionId(qId).size(); // количество ответов в вопросе!
-        //----Начало цикла (перебираем ответы в вопросе) -----------
-        for (int j = 0; j < qq; j++) {
-           // заполняем новый (сущность)ответ значениями полей из базы
-           Answer answer = new Answer();                                                         //объявили сущность
-           answer.setId(answerService.getAnswersByQuestionId(qId).get(j).getId());               //передали ИД
-           answer.setName(answerService.getAnswersByQuestionId(qId).get(j).getName());           //передали название
-           answer.setProperly(answerService.getAnswersByQuestionId(qId).get(j).getProperly());   //передали признак правильного ответа
-           answer.setUserAnswer(answerService.getAnswersByQuestionId(qId).get(j).isUserAnswer());//передали ответ пользователя
-           // сохраняем сущность в список
-           answers2.addAnswer(answer);
-        //------------------------- конец цикла ---------------------
+    public void load(Long tid){
+        for (Question q : questionService.getQuestionsByFormId(tid)){
+            List<Answer> TAnswers = new ArrayList<>();
+            List<Answer> n = new ArrayList<>();
+            n.add(new Answer());
+            this.answerListMap.put(new Question(), n);//создаем список ответов на один вопрос
+            TAnswers.addAll(answerService.getAnswersByQuestionId(q.getQid()));     //заполняем его
+            this.questionListMap.put(q, TAnswers);
         }
     }
 
-    public void saveToDb(Answers2 answers, Long questionId) {
+
+
+
+
+
+
+
+
+
+
+
+
+//    public void load(Long tid){
+//        long questionsQuantity = questionService.getQuestionsByFormId(tid).size();
+//
+//        for (Question q:questionService.getQuestionsByFormId(tid)) {
+//            List<Answer> TAnswers = new ArrayList<>();                             //создаем список ответов на один вопрос
+//            TAnswers.addAll(answerService.getAnswersByQuestionId(q.getQid()));     //заполняем его
+//            questions.setQuestion(q, TAnswers);                                    //передаем пару(ключ=вопрос, значение=список ответов)
+//        }
+//
+//    }
+
+
+
+
+
+//    public void loadFromDb(Long tid, List<Question> currentQuestionList) {
+//
+//        //Сначала отправим ид_темы - получим список вопросов этой темы
+//        //this.questionList.addAll(questionService.getQuestionsByFormId(tid));
+//
+//
+//        answerService.getAnswersByQuestionId(qId).size(); // количество ответов в вопросе!
+//        //----Начало цикла (перебираем ответы в вопросе) -----------
+//        for (Question que : questionList) {
+//            //получим текущий ИД_ВОПРОСА
+//            this.qId = que.getQid();
+//
+//            //т.к. кол-во вариантов ответов подразумевается
+//            // разное, поэтому получаем новый размер списка ответов
+//            int queSize = answerService.getAnswersByQuestionId(this.qId).size();
+//
+//
+//            // теперь переберем текущий список вариантов ответов
+//            for (int j = 0; j < queSize; j++) {
+//                // заполняем новый вариант ответа значениями полей из базы
+//                Answer answer = new Answer();                                                         //объявили сущность
+//                answer.setId(answerService.getAnswersByQuestionId(qId).get(j).getId());               //передали ИД
+//                answer.setName(answerService.getAnswersByQuestionId(qId).get(j).getName());           //передали название
+//                answer.setProperly(answerService.getAnswersByQuestionId(qId).get(j).getProperly());   //передали признак правильного ответа
+//                answer.setUserAnswer(answerService.getAnswersByQuestionId(qId).get(j).isUserAnswer());//передали ответ пользователя
+//
+//                allAnswerCount++;
+//                // сохраняем сущность в список
+//                answers2.addAnswer(answer);
+//                //------------------------- конец цикла ---------------------
+//            }
+//        }
+//        correct = new boolean[allAnswerCount];
+//    }
+
+    public void saveToDb(Map<Question, List<Answer>> answers) {
+
         System.out.println("--------------------------------СОХРАНЕНИЕ ОТВЕТОВ В БАЗУ-------------------------------------------");
-        for (Answer answer: answers.getAnswers()) {
-            System.out.println(answer.getId() + " | " + answer.getName() + " | " + answer.getProperly() + " | " + answer.isUserAnswer());
-            answerService.saveAnswer(answer, questionId);
+        for(Question q : answers.keySet()) {
+            for (Answer answer : answers.get(q)) {
+                System.out.println(answer.getId() + " | " + answer.getName() + " | " + answer.getProperly() + " | " + answer.isUserAnswer());
+                answerService.saveAnswer(answer, q.getQid());
+            }
         }
+    }
 
+    public void save(long id){
+        for(Question q : this.questionListMap.keySet()) {
+            for (Answer answer : this.questionListMap.get(q)) {
+                if (answer.getId()==id)
+                    answer.setUserAnswer(true);
+                answerService.saveAnswer(answer, q.getQid());
+            }
+        }
     }
 
 
+    @PostMapping(value = "/answers")
+    public String saveResults() {
 
-    @PostMapping(value = "/answers/*")
-    public String saveResults(@ModelAttribute("uAnswers") Answers2 answers){
+    // for (int i = 0; i < correct.length ; i++) {
+       //     System.out.println(correct[i]);
+       // }
+       //
+       saveToDb(this.answerListMap);
 
-        saveToDb(answers,qId);
+        //List<Boolean> checkedItems = foo.getCheckedItems();
+        //for (Question q : foo.keySet()) {
+         //   for (Answer a : questionListMap.get(q)) {
+          //      a.setUserAnswer(checkedItems.get(k));
+
+          //  }
+      //  }
+
         return "/results";
     }
 
 
     //--------------------------------------------------------------
     // класс оболочка - список ответов пользователя
-   public class Answers2 {
+    public class Answers2 {
         private List<Answer> user_answers ;           // здесь создаем список ответов
 
         @Autowired
@@ -161,7 +240,7 @@ import java.util.*;
         public void setAnswers(List<Answer> answers) {
             this.user_answers = answers;
         }
-    }
+   }
 
     public String getTopicName() {
         return topicName;
@@ -170,4 +249,69 @@ import java.util.*;
     public void setTopicName(String topicName) {
         this.topicName = topicName;
     }
+
+
+
+
+
+
+
+    public class Foo {
+        private List<Boolean> checkedItems;
+
+        public List<Boolean> getCheckedItems() {
+            return checkedItems;
+        }
+
+        public void setCheckedItems(List<Boolean> checkedItems) {
+            this.checkedItems = checkedItems;
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+    // класс оболочка - карта вопросов и ответов пользователя
+    public class Questions {
+        private Map<Question, List<Answer>> questions ;           // здесь создаем список ответов
+
+
+        @Autowired
+        public Questions() {
+            this.questions = new HashMap<>();
+
+        }
+
+
+
+        public void addQuestion(Question question, List<Answer> answers){
+
+            System.out.println("Создан вопрос: id = " + question.getQid() + " | название: "+ question.getName() + " ; ");
+            this.questions.put(question, answers);            // в список добавляем ответ
+        }
+
+        public Map<Question,List<Answer>> getAll(){
+            return this.questions;
+        }
+
+        public List<Question> getListOfQuestionNames() {
+            return (List<Question>) this.questions.keySet();
+        }
+
+        public  List<Answer> getListOfQuestionAnswersByQuestion(Question key){
+            return this.questions.get(key);
+        }
+
+        public void setQuestion(Question key, List<Answer> value){
+            this.questions.put(key, value);
+        }
+    }
+
+
 }
