@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="ru" class="no-js"
       xmlns:th="http://www.thymeleaf.org"
@@ -9,9 +10,9 @@
 
 </head>
 <body>
+<div th:replace="header :: header" />
 <div th:replace="header :: back" />
-    <div th:replace="header :: header" />
-        <!---span th:text="${guestname}"></span-->
-    <div th:replace="header :: footer" />
-    </body>
-    </html>
+<!---span th:text="${guestname}"></span-->
+<div th:replace="header :: footer" />
+</body>
+</html>
