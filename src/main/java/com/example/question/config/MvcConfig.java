@@ -9,8 +9,8 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
 
 @Configuration
-@EnableWebMvc
-@ComponentScan({"com.example.question.controller"})
+//@EnableWebMvc
+//@ComponentScan({"com.example.question.controller"})
 public class MvcConfig extends WebMvcConfigurerAdapter implements WebMvcConfigurer {
 
     @Override
@@ -31,19 +31,19 @@ public class MvcConfig extends WebMvcConfigurerAdapter implements WebMvcConfigur
         registry.addViewController("/chat").setViewName("chat");
     }
 
-    @Bean
-    public ViewResolver viewResolver(){
-        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
-        viewResolver.setViewClass(JstlView.class);
-        viewResolver.setPrefix("/resources/templates");
-        viewResolver.setSuffix(".html");
-        return viewResolver;
-    }
-
-    @Override
-    public void addResourceHandlers(ResourceHandlerRegistry registry) {
-            registry.addResourceHandler("/static/**").addResourceLocations("/static/");
-    }
+//    @Bean
+//    public ViewResolver viewResolver(){
+//        InternalResourceViewResolver viewResolver = new InternalResourceViewResolver();
+//        viewResolver.setViewClass(JstlView.class);
+//        viewResolver.setPrefix("/resources/templates");
+//        viewResolver.setSuffix(".html");
+//        return viewResolver;
+//    }
+//
+//    @Override
+//    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+//            registry.addResourceHandler("/static/**").addResourceLocations("/static/");
+//    }
 
     //    @Override
 //    public void addInterceptors(InterceptorRegistry registry) {
