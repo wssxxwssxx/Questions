@@ -48,7 +48,7 @@ public class User implements UserDetails {
     private Set<Role> roles;
 
 
-    @OneToMany(fetch=FetchType.LAZY)
+    @OneToMany( fetch = FetchType.EAGER)
     private List<Form> forms;
 
 
