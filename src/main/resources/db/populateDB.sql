@@ -13,9 +13,11 @@ INSERT INTO t_role VALUES (2, 'ROLE_ADMIN');
 -- Установить первому пользователю роль АДМИНа
 UPDATE t_user_roles SET (user_id, roles_id) = (1, 2);
 
-INSERT INTO t_form (id, name)  VALUES (1,'Преступление и наказание');
-INSERT INTO t_form (id, name)  VALUES  (2,'Горе от ума');
-INSERT INTO t_form (id, name)  VALUES (3,'Морской волк');
+INSERT INTO t_form (id, name,user_id)  VALUES (1,'Преступление и наказание',201);
+INSERT INTO t_form (id, name,user_id)  VALUES  (2,'Горе от ума',201);
+INSERT INTO t_form (id, name,user_id)  VALUES (3,'Морской волк',201);
+INSERT INTO t_form (id, name,user_id)  VALUES  (4,'Горе',201);
+
 
 
 ALTER SEQUENCE t_form_id_seq RESTART WITH 1;
