@@ -3,21 +3,67 @@
       xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.w3.org/1999/xhtml">
 <head>
     <div th:replace="header :: header-resources"/>
+    <script src="https://kit.fontawesome.com/fdfdb81886.js" crossorigin="anonymous"></script>
 </head>
 <body>
-    <!--/*@thymesVar id="guestname" type="guestname"*/-->
-    <li class="nav-item"  sec:authorize="isAuthenticated()" >
-
     <div th:replace="header :: header"/>
+<div class="container">
+    <div class="row">
 
-    <div class="panel panel-primary">
-    <img src="..." class="rounded mx-auto d-block" alt="photoLk">
-        <h1 class="text-center">
-            <a style="color: black;" href="/edit">${guestname}</a>
-        </h1>
+        <div class="col-md-4 col-sm-6">
+            <div class="panel panel-primary">
+                <img src="https://www.litmir.me/data/Author/0/277/%D0%A4%D0%BE%D1%82%D0%BE_%D0%9E%D1%80%D1%83%D1%8D%D0%BB%D0%BB_%D0%94%D0%B6%D0%BE%D1%80%D0%B4%D0%B6_71217.jpg" class="rounded mx-auto d-block" alt="Responsive image">
+                <h1 class="text-center">
+                    <a style="color: black;" href="/edit">Петя</a>
+                </h1>
+                <h6 class="text-center">
+                    <strong>Odessa, Ukraine</strong>
+                </h6>
+                <h6 class="text-center">
+                    <strong>Age:</strong> 27, <strong>Birthday: </strong> Feb 26, 1989
+                </h6>
+                <div class="list-group contacts">
+                    <a class="list-group-item" href="tel:+380507525137"><i class="fa fa-phone"></i> +380507525137</a>
+                    <a class="list-group-item" href="mailto:richard-hendricks@gmail.com"><i class="fa fa-envelope"></i> richard-hendricks@gmail.com</a>
+                    <a class="list-group-item" href="javascript:void(0);"><i class="fa fa-skype"></i> richard-hendricks</a>
+                    <a target="_blank" class="list-group-item" href="https://vk.com/richard-hendricks"><i class="fa fa-vk"></i> https://vk.com/richard-hendricks</a>
+                    <a target="_blank" class="list-group-item" href="https://facebook.com/richard-hendricks"><i class="fa fa-facebook"></i> https://facebook.com/richard-hendricks</a>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-8 col-sm-6">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <i class="fa fa-graduation-cap"></i> Тесты <a class="edit-block" href="/newform">Создать</a>
+                    </h3>
+                </div>
+                <div class="panel-body">
+                            <div class="timeline-panel">
+                                <div class="timeline-heading">
+                                    <table class="table col-lg-12 col-md-offset-2">
+                                        <thead class="thead-dark">
+                                        <tr>
+                                            <th scope="col">Название</th>
+                                            <th>
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr th:each="cabinet : ${userForm}">
+                                            <td class="text-light" th:text="${cabinet.name}"></td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                            </div>
+                </div>
+            </div>
+
+        </div>
     </div>
-    <div th:replace="header :: footer"/>
-    <div sec:authentication=""></div></a>
-    </li>
+</div>
+
+
+</div>
 </body>
 </html>

@@ -25,10 +25,12 @@ CREATE TABLE t_user_roles (
 
 -- Table: form
 CREATE TABLE t_form (
+    user_id INT NOT NULL,
     id SERIAL PRIMARY KEY ,
     name VARCHAR(255) NOT NULL,
-    data TIMESTAMP  DEFAULT now() NOT NULL
+    data TIMESTAMP  DEFAULT now() NOT NULL,
 
+    FOREIGN KEY (user_id) REFERENCES t_user (id)
 );
 
 -- Table: question

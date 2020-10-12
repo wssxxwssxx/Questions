@@ -1,6 +1,7 @@
 package com.example.question.entity;
 
 
+import com.example.question.form.Form;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -10,6 +11,7 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 @Data
@@ -46,10 +48,20 @@ public class User implements UserDetails {
     private Set<Role> roles;
 
 
+    @OneToMany(fetch=FetchType.LAZY)
+    private List<Form> forms;
+
+
     public User() {
     }
 
+    public void setForms(List<Form> forms) {
+        this.forms = forms;
+    }
 
+    public List<Form> getForms() {
+        return forms;
+    }
 
     public Long getId() {
         return id;

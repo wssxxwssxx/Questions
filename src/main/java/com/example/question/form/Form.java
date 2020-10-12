@@ -1,6 +1,7 @@
 package com.example.question.form;
 
 
+import com.example.question.entity.User;
 import jdk.jfr.Timestamp;
 import org.hibernate.annotations.CreationTimestamp;
 
@@ -33,7 +34,19 @@ public class Form {
             columnDefinition = "bool default true")
     private Date data;
 
+    @ManyToOne(fetch=FetchType.LAZY)
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
+
     public Form() {
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public User getUser() {
+        return user;
     }
 
     public Long getId() {
